@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cut -c 1-60 $1 | less
