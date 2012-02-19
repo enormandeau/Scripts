@@ -3,7 +3,12 @@
 """Digest sequences from a fasta file in sequences of a specified length.
 
 Usage:
-    %program <input_file> <length> <output_file>"""
+    %program <input_file> <fragment_length> <move> <output_file>
+
+input_file: a fasta file
+fragment_length: length of digested fragments
+move: number of non-overlapping nucleotides between two consecutive fragments"""
+
 
 import sys
 
@@ -16,7 +21,8 @@ except:
 try:
     in_file = open(sys.argv[1], "rU")
     nb_nuc = int(sys.argv[2])
-    out_file = sys.argv[3]
+    move = int(sys.argv[3])
+    out_file = sys.argv[4]
 except:
     print __doc__
     sys.exit(0)
@@ -29,9 +35,13 @@ def digest(seq, nb_nuc):
     n = seq[0]
     n_counter = 0
     s = seq[1]
+    start = nb_nuc/2
     while len(s) > nb_nuc/2:
-        frag = s[0:nb_nuc]
-        s = s[nb_nuc/4:]
+        frag = s[:nb_nuc - start]
+        start -= move
+        if start < 0:
+            start = 0
+            s = s[move:]
         n_counter +=1
         fragments.append([n + "_" + str("%06i" % n_counter), frag])
     return fragments
