@@ -30,6 +30,7 @@ if __name__ == '__main__':
 
     with open(result_file, "w") as f:
         while seq_num <= n:
+            seq = fasta_sequences.next()
             SeqIO.write([seq], f, "fasta")
             seq_num += 1
 
