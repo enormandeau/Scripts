@@ -7,7 +7,6 @@ Usage:
 # Importing modules
 import sys
 import re
-import random
 
 try:
     from Bio import SeqIO
