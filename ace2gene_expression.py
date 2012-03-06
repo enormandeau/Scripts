@@ -5,7 +5,7 @@
 # From ACE format to individual gene expression
 
 __authors__ = "Eric Normandeau"
-__program_name__ = "gexpress"
+__program_name__ = "ace2gene_expression"
 __version_info__ = ('0', '0', '4')
 __version__ = '.'.join(__version_info__)
 __revision_date__ = "2010-04-27"

@@ -40,7 +40,7 @@ if __name__ == '__main__':
                 elif l:
                     info = l.split("\t")
                     
-                    for i in xrange(10, len(info)):
+                    for i in xrange(9, len(info)):
                         data = info[i].split(":")
                         
                         if data[0] == "0/1" and data[1].split(",")[2] == "0":
