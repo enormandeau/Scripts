@@ -46,8 +46,9 @@ def best_blast_results(in_file, out_file):
                                      for i in range(3)])
             best_result = ["NoID", "No hits found", 1]
             for result in results:
-                if result[0].find("No hits found") > -1:
+                if result[0].find("No hits found") or result[0] == "":
                     continue
+                print result[2], float(result[2])
                 evalue = float(result[2])
                 best_evalue = float(best_result[2])
                 result = list(result)
