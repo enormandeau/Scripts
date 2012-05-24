@@ -6,7 +6,7 @@
 Input file is the result file (outfmt 6) of fasta file blasted against itself.
 
 Usage:
-    %program <input_file> <wanted_file> <output_file>"""
+    %program <input_file> <output_file>"""
 
 import sys
 import re
@@ -43,10 +43,13 @@ def find_name(text):
     est_search = re.compile("gi\|[0-9]+")
     geneFP_search = re.compile("geneFP_[0-9]+")
     array_search = re.compile("[a-zA-Z]+[0-9]+")
+    amdc_search = re.compile("all_abyss2_min_l200_min_c500_contig_[0-9]+")
+    
     name = re.findall(contig_search, text)
     name += re.findall(est_search, text)
     name += re.findall(geneFP_search, text)
     name += re.findall(array_search, text)
+    name += re.findall(amdc_search, text)
     try:
         name = name[0]
     except:

@@ -30,9 +30,13 @@ with open(in_file) as f:
         k = line.strip().split()[0]
         in_dict[k].update(line.strip().split())
 
+total_len = len(in_dict)
+
 print "There are", len(all_ids), "unique identifiers"
 
 while len(in_dict.items()) > 0:
+    sys.stdout.write("\r" + str(len (in_dict)) + " of " + str(total_len) + ": " + str(100 * len(in_dict) / total_len) + "%            ")
+    sys.stdout.flush()
     temp = in_dict.popitem()
     items = set(temp[1])
     for d in range(MAX_DEPTH):

@@ -32,3 +32,4 @@ with open(out_file, "w") as f:
         name = line.split("\t")[0]
         if name in wanted:
             f.write(line + "\n")
+            wanted.remove(name)
