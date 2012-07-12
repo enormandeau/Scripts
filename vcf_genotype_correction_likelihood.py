@@ -43,12 +43,13 @@ if __name__ == '__main__':
                     for i in xrange(9, len(info)):
                         data = info[i].split(":")
                         lh = data[1].split(",")
-                        if lh[0] == "0":
-                            data[0] = "0/0"
-                        elif lh[1] == "0":
-                            data[0] = "0/1"
-                        elif lh[2] == "0":
-                            data[0] = "1/1"
+                        if data[0] != "./.":
+                            if lh[0] == "0":
+                                data[0] = "0/0"
+                            elif lh[1] == "0":
+                                data[0] = "0/1"
+                            elif lh[2] == "0":
+                                data[0] = "1/1"
                         info[i] = ":".join(data)
                         
 # Old program that did not use likelihood:                        
