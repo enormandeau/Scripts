@@ -21,5 +21,5 @@ except:
     print __doc__
     sys.exit(1)
 
-print "<" + progress * "=" + (total - progress) * "-" + ">\n"
+print "progress: " + str(progress) + "/" + str(total) + " (" + progress * "=" + (total - progress) * "-" + ")"
 
