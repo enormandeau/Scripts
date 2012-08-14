@@ -21,8 +21,13 @@ except:
     print __doc__
     sys.exit(1)
 
+try:
+    process_name = sys.argv[3]
+except:
+    process_name = "progress"
+
 percent_done = 100. * number_done / number_total
 #percent_done = str("%3.1f" % (100. * number_done / number_total))
 
-print "number_done: " + str(number_done) + "/" + str(number_total) + " (" + int(percent_done * 0.3) * "=" + int((100 - percent_done) * 0.3) * "-" + ") " + str("%3.1f" % percent_done) + "%"
+print process_name + ": " + str(number_done) + "/" + str(number_total) + " (" + int(percent_done * 0.3) * "=" + int((100 - percent_done) * 0.3) * "-" + ") " + str("%3.1f" % percent_done) + "%"
 
