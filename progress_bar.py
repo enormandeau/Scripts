@@ -21,5 +21,8 @@ except:
     print __doc__
     sys.exit(1)
 
-print "progress: " + str(progress) + "/" + str(total) + " (" + progress * "=" + (total - progress) * "-" + ")"
+completed = str("%3.1f" % (100. * progress / total))
+#completed = (5 - len(completed)) * " " + completed
+
+print "progress: " + str(progress) + "/" + str(total) + " (" + progress * "=" + (total - progress) * "-" + ") " + str(completed) + "%"
 
