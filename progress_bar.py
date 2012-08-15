@@ -33,12 +33,12 @@ except:
     percent_done = 0
 
 name = process_name + ": "
-name = name + (8 - len(name)) * " "
+name = name + (12 - len(name)) * " "
 
 numbers = str(number_done) + "/" + str(number_total) + " "
 numbers = numbers + (8 - len(numbers)) * " "
 
-progress = " (" + int(math.floor(percent_done * 0.3)) * "=" + int(math.ceil((100 - percent_done) * 0.3)\
+progress = " (" + int(math.floor(percent_done * 0.5)) * "=" + int(math.ceil((100 - percent_done) * 0.5)\
 ) * " " + ") "
 
 percent = str("%3.1f" % percent_done) + "%"
