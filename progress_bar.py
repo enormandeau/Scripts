@@ -38,8 +38,9 @@ name = name + (16 - len(name)) * " "
 numbers = str(number_done) + "/" + str(number_total) + " "
 numbers = numbers + (8 - len(numbers)) * " "
 
-progress = " (" + int(math.floor(percent_done * 0.3)) * "=" + int(math.ceil((100 - percent_done) * 0.3)\
-) * " " + ") "
+progress = int(math.floor(percent_done * 0.3)) * "="
+progress = progress + (30 - len(progress)) * " "
+progress = "(" + progress + ") "
 
 percent = str("%3.1f" % percent_done) + "%"
 
