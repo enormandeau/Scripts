@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Parse the result of the unix fdupes program.
+"""Parse the result of the unix fdupes program
 
 fdupes finds duplicated files in a given set of directories.
 
