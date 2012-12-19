@@ -3,7 +3,6 @@
 # Usage: ftp_add_user.sh USERNAME
 
 # TODO
-#
 # - Generate password
 # - create user
 # - remove examples.desktop
