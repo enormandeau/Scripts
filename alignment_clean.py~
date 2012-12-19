@@ -132,7 +132,7 @@ def remove_snps(names, sequences, snps):
 #    print "Removing low frequency snps"
     for i in sorted(range(len(sequences[0])), reverse=True):
         nuc = dict()
-        nuc["A"] = nuc["C"] = nuc["G"] = nuc["T"] = nuc["-"] = 0;nuc
+        nuc["A"] = nuc["C"] = nuc["G"] = nuc["T"] = nuc["-"] = 0
         for j in range(len(sequences)):
             nuc[sequences[j][i]] += 1
         nuc.pop("-")
