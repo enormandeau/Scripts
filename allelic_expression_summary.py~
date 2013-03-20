@@ -189,10 +189,14 @@ def output_results(snps, out_file, groups, alpha):
                 p_value = binom_test([ind_freqs[0], ind_freqs[1]])
                 loc_results.append(p_value)
                 synthesis = categorize_fold_change(fold_change, p_value, alpha)
+#                print
+#                print loc
+#                print fold_change, p_value, synthesis
                 glob_synthesis += synthesis
                 stat = [0, 0, len(individuals)]
                 for i in individuals:
                     a = genotype(i)
+#                    print a, categorize_fold_change(a.fold_change, a.p_value, alpha)
                     if categorize_fold_change(a.fold_change, a.p_value, 
                         alpha) == synthesis:
                         stat[1] += 1
