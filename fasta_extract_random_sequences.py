@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+
+### DO NOT USE THIS SCRIPT
+# Instead, use 'fasta_reservoir_sampling.py'
+
 """Extract approximately n random sequences from a fasta file. To be sure to get
 the exact desired number of sequences, boost the number of wanted sequences by a
 certain amount. Eg:
