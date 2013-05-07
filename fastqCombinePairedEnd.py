@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-"""Recombine 2 fastq files (R1 and R2) after they have been trimmed and cleaned
+"""Resynchronize 2 fastq files (R1 and R2) after they have been trimmed and cleaned
+
+Three output files are generated. The first two files contain the reads of the
+pairs that match and the third contains the solitary reads.
 
 Usage:
     python fastqcombinepairedend-2.py  seqheader  paireddelim  input1  input2
