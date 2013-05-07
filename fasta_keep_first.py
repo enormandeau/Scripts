@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Extract sequences from a fasta file if their name is in a 'wanted' file.
-
-Wanted file contains one sequence name per line.
+"""Extract only the first occurence of each sequences, based on the name.
 
 Usage:
     %program <input_file> <output_file>"""
