@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Extract fasta sequences that are above a minimal length.
+"""Extract fasta sequences that are at or above a minimal length.
 
 Usage:
     %program <input_file> <output_file>"""
