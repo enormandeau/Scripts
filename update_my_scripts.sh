@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo cp /home/labolb/Scripts/Scripts/* /usr/local/bin
+sudo cp /home/labolb/Scripts/github/Scripts/* /usr/local/bin
