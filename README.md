@@ -1,14 +1,14 @@
 ### About these scripts
 
-This is a collection of scripts written over the years to solve
-specific problems. Some of them are well tested, others not so
-well. As they have been written over a long period of time, and while
-I was improving my Python programming continually, the style and
-quality will inevitably vary.
+This is a collection of scripts written and downloaded over the years to solve
+specific problems. Some of them are well tested, others not so well. As they
+have been written over a long period of time, and while I was improving my
+Python programming continually, the style and quality will inevitably vary.
 
 ### Use at your own risk
 
-These programs are provided as is, without any implied garanty of usefulness but with the hope that they may be of help to some.
+These programs are provided as is, without any implied garanty of usefulness
+but with the hope that they may be of help to some.
 
 ### Licensing
 
