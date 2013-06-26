@@ -5,10 +5,8 @@ Three output files are generated. The first two files contain the reads of the
 pairs that match and the third contains the solitary reads.
 
 Usage:
-    python fastqcombinepairedend-2.py  seqheader  paireddelim  input1  input2
+    python fastqCombinePairedEnd.py  input1  input2
 
-seqheader = Portion of sequence name common to all sequences (eg: @HWI)
-paireddelim = String that separates the sequence name from the R1/R2 identifier (use " ") 
 input1 = LEFT  fastq file (R1)
 input2 = RIGHT fastq file (R2)
 """
@@ -18,10 +16,8 @@ import sys
 
 # Parsing user input
 try:
-    seqheader = sys.argv[1]
-    paireddelim = sys.argv[2]
-    in1 = sys.argv[3]
-    in2 = sys.argv[4]
+    in1 = sys.argv[1]
+    in2 = sys.argv[2]
 except:
     print __doc__
     sys.exit(1)
@@ -32,12 +28,11 @@ class Fastq(object):
     """
     def __init__(self, name, seq, name2, qual):
         self.name = name
-        self.shortname = self.name.split()[0]
         self.seq = seq
         self.name2 = name2
         self.qual = qual
     def getShortname(self):
-        return self.shortname
+        return self.name.split()[0]
     def write_to_file(self, handle):
         handle.write(self.name + "\n")
         handle.write(self.seq + "\n")
@@ -45,7 +40,7 @@ class Fastq(object):
         handle.write(self.qual + "\n")
 
 # Defining functions
-def fastq_parser(infile, seqheader):
+def fastq_parser(infile):
     """Takes a fastq file infile and returns a fastq object iterator
     """
     with open(infile) as f:
@@ -62,30 +57,41 @@ def fastq_parser(infile, seqheader):
 if __name__ == "__main__":
     seq1_dict = {}
     seq2_dict = {}
-    seq1 = fastq_parser(in1, seqheader)
-    seq2 = fastq_parser(in2, seqheader)
+    seq1 = fastq_parser(in1)
+    seq2 = fastq_parser(in2)
+    s1_finished = False
+    s2_finished = False
     with open(in1 + "_pairs_R1.fastq", "w") as out1:
         with open(in2 + "_pairs_R2.fastq", "w") as out2:
             with open(in1 + "_singles.fastq", "w") as out3:
-                for s1 in seq1:
+                while not (s1_finished and s2_finished):
+                    try:
+                        s1 = seq1.next()
+                    except:
+                        s1_finished = True
                     try:
                         s2 = seq2.next()
                     except:
-                        break
-                    if s1.getShortname() in seq2_dict:
-                        s1.write_to_file(out1)
+                        s2_finished = True
+
+                    # Add new sequences to hashes
+                    if not s1_finished:
+                        seq1_dict[s1.getShortname()] = s1
+                    if not s2_finished:
+                        seq2_dict[s2.getShortname()] = s2
+
+                    if not s1_finished and s1.getShortname() in seq2_dict:
+                        seq1_dict[s1.getShortname()].write_to_file(out1)
+                        seq1_dict.pop(s1.getShortname())
                         seq2_dict[s1.getShortname()].write_to_file(out2)
                         seq2_dict.pop(s1.getShortname())
-                    else:
-                        seq1_dict[s1.getShortname()] = s1
-                    if s2.getShortname() in seq1_dict:
-                        s2.write_to_file(out2)
+                    if not s2_finished and s2.getShortname() in seq1_dict:
+                        seq2_dict[s2.getShortname()].write_to_file(out2)
+                        seq2_dict.pop(s2.getShortname())
                         seq1_dict[s2.getShortname()].write_to_file(out1)
                         seq1_dict.pop(s2.getShortname())
-                    else:
-                        seq2_dict[s2.getShortname()] = s2
                         
-                # Treat all un paired reads
+                # Treat all unpaired reads
                 for r in seq1_dict.values():
                     r.write_to_file(out3)
                 for r in seq2_dict.values():
