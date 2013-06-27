@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 """Split a fasta file in n files of approximately the same number of sequences
 
 WARNING: This will create 'n' files in your present directory
@@ -59,7 +59,7 @@ if __name__ == '__main__':
 
     # Iterate through sequences and write to files
     file_number = 0
-    for sequence in FastaIterator(input_file)
+    for sequence in FastaIterator(input_file):
         current_file = file_number % num_files
         sequence.write_to_file(output_files[current_file])
         file_number += 1
