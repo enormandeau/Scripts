@@ -24,7 +24,7 @@ except:
 
 # Defining classes
 class Fastq(object):
-    """Fasta object with name and sequence
+    """Fastq object with name and sequence
     """
     def __init__(self, name, seq, name2, qual):
         self.name = name
