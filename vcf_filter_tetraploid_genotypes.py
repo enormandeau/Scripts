@@ -16,13 +16,11 @@ import sys
 # Defining classes
 
 # Defining functions
-def reconstruct_line(begin, genotypes):
-    return "\t".join(begin + genotypes) + "\n"
 
 # Main
 if __name__ == '__main__':
     # Global variables
-    rows_before = 9
+    ROWS_BEFORE = 9
 
     # Parsing user input
     try:
@@ -47,16 +45,19 @@ if __name__ == '__main__':
                 # Calculate number of samples
                 if line.find("#CHROM") >= 0:
                     split_line = line.split("\t")
-                    num_samples = len(split_line) - rows_before
+                    num_samples = len(split_line) - ROWS_BEFORE
                     print "Num samples:", num_samples
+
+                # Output comment lines without treating them
                 if line.startswith("#") or line.startswith("\"#"):
                     out_f.write(line + "\n")
+
                 else:
                     # Extract info from the line
                     split_line = line.split("\t")
 
-                    begin = split_line[0:rows_before]
-                    genotypes_info = split_line[rows_before: rows_before + num_samples]
+                    begin = split_line[0:ROWS_BEFORE]
+                    genotypes_info = split_line[ROWS_BEFORE: ROWS_BEFORE + num_samples]
 
                     # Correct genotypes
                     corrected_genotypes = []
