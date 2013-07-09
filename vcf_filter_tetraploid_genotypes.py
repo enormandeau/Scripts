@@ -46,7 +46,8 @@ if __name__ == '__main__':
                 if line.find("#CHROM") >= 0:
                     split_line = line.split("\t")
                     num_samples = len(split_line) - ROWS_BEFORE
-                    print "Num samples:", num_samples
+                    print "Treating", input_file
+                    print "Num. samples:", num_samples
 
                 # Output comment lines without treating them
                 if line.startswith("#") or line.startswith("\"#"):
