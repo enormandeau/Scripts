@@ -20,7 +20,7 @@ import sys
 # Main
 if __name__ == '__main__':
     # Global variables
-    ROWS_BEFORE = 9
+    NUM_INFO_ROWS = 9
 
     # Parsing user input
     try:
@@ -45,9 +45,9 @@ if __name__ == '__main__':
                 # Calculate number of samples
                 if line.find("#CHROM") >= 0:
                     split_line = line.split("\t")
-                    num_samples = len(split_line) - ROWS_BEFORE
-                    print "Treating file:  ", input_file
-                    print "Num. samples:  ", num_samples
+                    num_samples = len(split_line) - NUM_INFO_ROWS
+                    print "Treating file: ", input_file
+                    print "Num. samples: ", num_samples
 
                 # Output comment lines without treating them
                 if line.startswith("#") or line.startswith("\"#"):
@@ -57,8 +57,8 @@ if __name__ == '__main__':
                     # Extract info from the line
                     split_line = line.split("\t")
 
-                    begin = split_line[0:ROWS_BEFORE]
-                    genotypes_info = split_line[ROWS_BEFORE: ROWS_BEFORE + num_samples]
+                    begin = split_line[0:NUM_INFO_ROWS]
+                    genotypes_info = split_line[NUM_INFO_ROWS: NUM_INFO_ROWS + num_samples]
 
                     # Correct genotypes
                     corrected_genotypes = []
