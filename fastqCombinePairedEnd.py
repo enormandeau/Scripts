@@ -1,14 +1,21 @@
 #!/usr/bin/env python
 """Resynchronize 2 fastq files (R1 and R2) after they have been trimmed and cleaned
 
+WARNING! This program assumes that the fastq file uses EXACTLY four lines per
+    sequence
+
 Three output files are generated. The first two files contain the reads of the
-pairs that match and the third contains the solitary reads.
+    pairs that match and the third contains the solitary reads.
 
 Usage:
-    python fastqCombinePairedEnd.py  input1  input2
+    python fastqCombinePairedEnd.py input1 input2 separator
 
 input1 = LEFT  fastq file (R1)
 input2 = RIGHT fastq file (R2)
+separator = character that separates the name of the read from the part that
+    describes if it goes on the left or right, usually with characters '1' or
+    '2'.  The separator is often a space, but could be another character. A
+    space is used by default.
 """
 
 # Importing modules
@@ -22,6 +29,11 @@ except:
     print __doc__
     sys.exit(1)
 
+try:
+    separator = sys.argv[3]
+except:
+    separator = " "
+
 # Defining classes
 class Fastq(object):
     """Fastq object with name and sequence
@@ -31,8 +43,8 @@ class Fastq(object):
         self.seq = seq
         self.name2 = name2
         self.qual = qual
-    def getShortname(self):
-        return self.name.split()[0]
+    def getShortname(self, separator):
+        return self.name.split(separator)[0]
     def write_to_file(self, handle):
         handle.write(self.name + "\n")
         handle.write(self.seq + "\n")
@@ -76,19 +88,19 @@ if __name__ == "__main__":
 
                     # Add new sequences to hashes
                     if not s1_finished:
-                        seq1_dict[s1.getShortname()] = s1
+                        seq1_dict[s1.getShortname(separator)] = s1
                     if not s2_finished:
-                        seq2_dict[s2.getShortname()] = s2
+                        seq2_dict[s2.getShortname(separator)] = s2
 
-                    if not s1_finished and s1.getShortname() in seq2_dict:
-                        seq1_dict[s1.getShortname()].write_to_file(out1)
-                        seq1_dict.pop(s1.getShortname())
-                        seq2_dict[s1.getShortname()].write_to_file(out2)
-                        seq2_dict.pop(s1.getShortname())
-                    if not s2_finished and s2.getShortname() in seq1_dict:
-                        seq2_dict[s2.getShortname()].write_to_file(out2)
+                    if not s1_finished and s1.getShortname(separator) in seq2_dict:
+                        seq1_dict[s1.getShortname(separator)].write_to_file(out1)
+                        seq1_dict.pop(s1.getShortname(separator))
+                        seq2_dict[s1.getShortname(separator)].write_to_file(out2)
+                        seq2_dict.pop(s1.getShortname(separator))
+                    if not s2_finished and s2.getShortname(separator) in seq1_dict:
+                        seq2_dict[s2.getShortname(separator)].write_to_file(out2)
                         seq2_dict.pop(s2.getShortname())
-                        seq1_dict[s2.getShortname()].write_to_file(out1)
+                        seq1_dict[s2.getShortname(separator)].write_to_file(out1)
                         seq1_dict.pop(s2.getShortname())
                         
                 # Treat all unpaired reads
