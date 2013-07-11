@@ -99,9 +99,9 @@ if __name__ == "__main__":
                         seq2_dict.pop(s1.getShortname(separator))
                     if not s2_finished and s2.getShortname(separator) in seq1_dict:
                         seq2_dict[s2.getShortname(separator)].write_to_file(out2)
-                        seq2_dict.pop(s2.getShortname())
+                        seq2_dict.pop(s2.getShortname(separator))
                         seq1_dict[s2.getShortname(separator)].write_to_file(out1)
-                        seq1_dict.pop(s2.getShortname())
+                        seq1_dict.pop(s2.getShortname(separator))
                         
                 # Treat all unpaired reads
                 for r in seq1_dict.values():
