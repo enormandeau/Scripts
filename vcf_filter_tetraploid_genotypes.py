@@ -62,14 +62,12 @@ if __name__ == '__main__':
                     corrected_genotypes = []
 
                     for genotype in genotypes_info:
-                        print genotype
                         if genotype == ".":
                             corrected_genotypes.append(genotype)
                         else:
                             split_genotype = genotype.split(":")
                             call = split_genotype[0]
                             depth = int(split_genotype[args.column])
-                            print "   Depth:", depth
 
                             # Homozygotes
                             if call in ["0/0/0/0", "1/1/1/1", "2/2/2/2"]:
@@ -84,8 +82,6 @@ if __name__ == '__main__':
                                     corrected_genotypes.append(".")
                                 else:
                                     corrected_genotypes.append(genotype)
-                    print corrected_genotypes
-                    
                     # Output corrected line
                     out_f.write("\t".join(begin + corrected_genotypes) + "\n")
                             
