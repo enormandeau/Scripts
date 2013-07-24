@@ -1,16 +1,9 @@
 #!/usr/bin/python
-"""Filter called genotypes in a vcf file
-
-USAGE:
-    python vcf_filter_tetraploid_genotypes.py input output homozygote heterozygote
-
-input = name of input vcf file
-output = name of output vcf file
-homozygote = mininum number of sequences to call a homozygous genotype
-heterozygote = mininum number of sequences to call a heterozygote genotype
+"""Recall tetraploid genotypes based on the number of reads in a vcf file
 """
 
 # Importing modules
+import argparse
 import sys
 
 # Defining classes
@@ -23,18 +16,23 @@ if __name__ == '__main__':
     NUM_INFO_ROWS = 9
 
     # Parsing user input
-    try:
-        input_file = sys.argv[1]
-        output_file = sys.argv[2]
-        hom_threshold = int(sys.argv[3])
-        het_threshold = int(sys.argv[4])
-    except:
-        print __doc__
-        sys.exit(1)
+    parser = argparse.ArgumentParser(description=
+            "Recall tetraploid genotypes based on the number of reads in a vcf file")
+    parser.add_argument('-i', '--input-file', type=str, required=True,
+            help='Name of the input vcf file')
+    parser.add_argument('-o', '--output-file', type=str, required=True,
+            help='Name of the output vcf file')
+    parser.add_argument('-H', '--hom-threshold', type=int, required=True,
+            help='Minimum number of sequences to call a homozygote')
+    parser.add_argument('-e', '--het-threshold', type=int, required=True,
+            help='Minimum number of sequences to call a heterozygote')
+    parser.add_argument('-c', '--column', type=int, required=True,
+            help='Column containing the number of reads')
+    args = parser.parse_args()
 
     # Treating input file
-    with open(input_file) as f:
-        with open(output_file, "w") as out_f:
+    with open(args.input_file) as f:
+        with open(args.output_file, "w") as out_f:
             for line in f:
                 line = line.strip()
 
@@ -46,7 +44,7 @@ if __name__ == '__main__':
                 if line.find("#CHROM") >= 0:
                     split_line = line.split("\t")
                     num_samples = len(split_line) - NUM_INFO_ROWS
-                    print "Treating file: ", input_file
+                    print "Treating file: ", args.input_file
                     print "Num. samples: ", num_samples
 
                 # Output comment lines without treating them
@@ -64,26 +62,29 @@ if __name__ == '__main__':
                     corrected_genotypes = []
 
                     for genotype in genotypes_info:
+                        print genotype
                         if genotype == ".":
                             corrected_genotypes.append(genotype)
                         else:
                             split_genotype = genotype.split(":")
                             call = split_genotype[0]
-                            depth = int(split_genotype[2])
+                            depth = int(split_genotype[args.column])
+                            print "   Depth:", depth
 
                             # Homozygotes
                             if call in ["0/0/0/0", "1/1/1/1", "2/2/2/2"]:
-                                if not depth >= hom_threshold:
+                                if not depth >= args.hom_threshold:
                                     corrected_genotypes.append(".")
                                 else:
                                     corrected_genotypes.append(genotype)
 
                             # Heterozygotes
                             else:
-                                if not depth >= het_threshold:
+                                if not depth >= args.het_threshold:
                                     corrected_genotypes.append(".")
                                 else:
                                     corrected_genotypes.append(genotype)
+                    print corrected_genotypes
                     
                     # Output corrected line
                     out_f.write("\t".join(begin + corrected_genotypes) + "\n")
