@@ -25,7 +25,7 @@ class Fasta(object):
         handle.write(self.sequence + "\n")
 
 # Defining functions
-def FastaIterator(object):
+def fasta_iterator(object):
     """Takes a fasta file input_file and returns a fasta iterator
     """
     with open(input_file) as f:
@@ -59,7 +59,7 @@ if __name__ == '__main__':
 
     # Iterate through sequences and write to files
     file_number = 0
-    for sequence in FastaIterator(input_file):
+    for sequence in fasta_iterator(input_file):
         current_file = file_number % num_files
         sequence.write_to_file(output_files[current_file])
         file_number += 1

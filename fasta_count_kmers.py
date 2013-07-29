@@ -19,7 +19,7 @@ class Fasta(object):
         handle.write(self.sequence + "\n")
 
 # Defining functions
-def FastaIterator(object):
+def fasta_iterator(input_file):
     """Takes a fasta file input_file and returns a fasta iterator
     """
     with open(input_file) as f:
@@ -54,7 +54,7 @@ if __name__ == '__main__':
     # Cound kmers
     kmer_dict = defaultdict(int)
 
-    for seq in FastaIterator(input_file):
+    for seq in fasta_iterator(input_file):
         for start in xrange(0, len(seq.sequence) - kmer_length):
             stop = start + kmer_length
             kmer_dict[seq.sequence[start: stop]] += 1
