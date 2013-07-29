@@ -5,5 +5,5 @@
 
 NUMHOURS=$1
 
-echo $(date +%Y-%M-%d_%H-%m-%S)"\t"$1 >> project_timelog.tsv
+echo -e $(date +%Y-%M-%d_%H-%M-%S)"\t"$1 >> project_timelog.tsv
 
