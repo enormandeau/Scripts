@@ -3,7 +3,7 @@
 
 """Count and export redundancy of sequences found in a RAD file.
 
-Warning: may crash by using the whole memory.
+Warning: may crash by using the whole memory on large files
 
 Usage:
     %program <input_file> <output_file> [data_column]"""

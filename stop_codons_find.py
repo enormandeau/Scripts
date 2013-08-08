@@ -2,31 +2,23 @@
 # -*- coding: utf-8 -*-
 
 # Find stop codons and longuest ORF from blastx results
-
-
 __authors__ = "Eric Normandeau"
 __program_name__ = "stop_codons_find"
 __version_info__ = ('0', '0', '1')
 __version__ = '.'.join(__version_info__)
 __revision_date__ = "2011-01-14"
 
-
 # Importing modules
-
 import os
 import sys
 import getopt
 import platform
 from Bio import SeqIO
 
-
 # Class definitions
-
 # !!! This program REALLY needs a class definition for each sequence !!!
 
-
 # Function definitions
-
 def help():
     """Help attained by typing './program_name.py -h'
     """
@@ -234,8 +226,4 @@ if __name__ == "__main__":
     sequences = find_stop_codons(fasta_sequences)
     results = trim(sequences)
     output_results(results, output_file)
-    
-    
-    
-    
 

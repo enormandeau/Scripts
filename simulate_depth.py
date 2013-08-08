@@ -32,3 +32,4 @@ if __name__ == '__main__':
         for position in xrange(start, start + read_length):
             genome[position] += 1
     print genome
+

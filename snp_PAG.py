@@ -1,20 +1,14 @@
-## Preparing SNP detection for coregonus
-##
-## Eric Normandeau 2010-02-10
+# Preparing SNP detection for coregonus
+#
+# Eric Normandeau 2010-02-10
 
-
-#############
-## Import modules
-
+# Import modules
 import re
 import string
 import math
 from copy import copy
 
-
-########################
-## Function definitions
-
+# Function definitions
 def readfile(path):
     """Read file and return a list containing the file lines"""
     out = []
@@ -60,9 +54,7 @@ def writefasta(var, path, ncar=60):
     file.close()
 
 
-#############################
-## Modifying the fasta names
-
+# Modifying the fasta names
 INPUT_FASTA = r"C:\Python26\_projects\PAG\Aro_Inter3_13661_Contigs.fa"
 OUTPUT_FASTA = r"C:\Python26\_projects\PAG\Aro_Inter3_13661_Contigs_renamed.fa"
 
@@ -73,11 +65,9 @@ fasta_out = [[">Contig" + str("%05i" % int(re.findall("Contig([0-9]+)", fasta[0]
 writefasta(fasta_out, OUTPUT_FASTA)
 
 
-#########################
-## Parsing blast result
-## After blast+
-## No format
-
+# Parsing blast result
+# After blast+
+# No format
 BLAST_INPUT = r"C:\Python26\_projects\PAG\Aro_Inter_13661_res.txt"
 BLAST_OUTPUT = r"C:\Python26\_projects\PAG\_output_Aro_Inter_13661_res_parsed.txt"
 

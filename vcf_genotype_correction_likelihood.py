@@ -51,11 +51,5 @@ if __name__ == '__main__':
                             elif lh[2] == "0":
                                 data[0] = "1/1"
                         info[i] = ":".join(data)
-                        
-# Old program that did not use likelihood:                        
-#                        if data[0] == "0/1" and data[1].split(",")[2] == "0":
-#                            data[0] = "1/1"
-#                            info[i] = ":".join(data)
-                    
                     out_f.write("\t".join(info) + "\n")
 

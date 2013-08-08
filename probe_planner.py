@@ -4,21 +4,17 @@
 # Prepare sequences for probe design
 # Prepare cDNA for Genbank submission
 
-
 # Program information
-
 __authors__ = "Eric Normandeau"
 __program_name__ = "probe_planner"
 __version_info__ = ('1', '2', '0')
 __version__ = '.'.join(__version_info__)
 __revision_date__ = "2011-02-17"
 
-
 # Todo list:
 # - Add a 'computer assisted' automated gene name annotation (using the
 #   protein name). See the following Biostar question:
 #   http://biostar.stackexchange.com/questions/5460
-
 
 # Known bugs:
 # - In the case where the longuest ORF without a stop codon is not the first
@@ -26,7 +22,6 @@ __revision_date__ = "2011-02-17"
 
 
 # Importing modules
-
 import os
 import sys
 import getopt
@@ -36,7 +31,6 @@ from Bio import SeqIO
 
 
 # Class definitions
-
 class AutoDict(dict):
     """Implementation of perl's autovivification feature
     """
@@ -584,11 +578,9 @@ def write_5_column_table(sequences, output_file):
                               blast_name]) + "\n")
             f.write("\t".join(["", "", "", "codon_start", str(1)]) + "\n")
 
-
 # Probe planner, scriptish
 # Wants to grow up and mature
 # A full fledged program
-
 def main():
     try:
         opts, args = getopt.getopt(sys.argv[1:], "hs:b:r:o:f:", ["help",

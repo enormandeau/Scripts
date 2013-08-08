@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 # Find synonymous and non-synonymous SNP variants in fasta alignments
-
 __authors__ = "Eric Normandeau"
 __program_name__ = "synonym_storm"
 __version_info__ = ('0', '0', '3')
@@ -11,17 +10,13 @@ __revision_date__ = "2010-06-14"
 
 
 # Importing modules
-
 import os
 import sys
 import getopt
 import platform
-
 from Bio import SeqIO
 
-
 # Class definitions
-
 class AutoDict(dict):
     """Implementation of perl's autovivification feature."""
     def __getitem__(self, item):
@@ -33,7 +28,6 @@ class AutoDict(dict):
 
 
 # Function definitions
-
 def help():
     _plateform = platform.system()
     name = __program_name__
