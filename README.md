@@ -1,9 +1,8 @@
 ### About these scripts
 
-This is a collection of scripts written and downloaded over the years to solve
-specific problems. Some of them are well tested, others not so well. As they
-have been written over a long period of time, and while I was improving my
-Python programming continually, the style and quality will inevitably vary.
+This is a collection of scripts written over the years to solve specific
+problems. Some of them are well tested, others not so well. As they have been
+written over a long period of time, the style and quality will inevitably vary.
 
 ### Use at your own risk
 
@@ -19,3 +18,4 @@ Read the LICENSE file for information about the license affecting these files
 You can send comments to the author at:
 
 eric dot normandeau dot qc at gmail dot com
+
