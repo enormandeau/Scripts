@@ -22,7 +22,7 @@ with open(input_file) as in_f:
         l = line.strip()
         if to_print == True and l.find(stop) > -1:
             break
-        if to_print == True and l != "":
+        if to_print == True:
             print l
         elif l.find(start) > -1:
             to_print = True
