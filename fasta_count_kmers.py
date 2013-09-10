@@ -1,4 +1,4 @@
-#;!/usr/bin/python
+#!/usr/bin/python
 """Return frequency of kmers present in a fasta file
 """
 
