@@ -5,8 +5,15 @@
 markers_extract_to_screen.py ~/Dropbox/Lab/daily_plan.txt "#BEGIN WEEKLY REPORT" "#END WEEKLY REPORT" > ~/Desktop/weekly_report.txt
 
 # Send report by email
-gmailsend.py eric.normandeau.qc@gmail.com louis.bernatchez@bio.ulaval.ca "Rapport hebdomadaire" ~/Desktop/weekly_report.txt ~/.gmpw
-#gmailsend.py eric.normandeau.qc@gmail.com eric.normandeau@bio.ulaval.ca "Rapport hebdomadaire" ~/Desktop/weekly_report.txt ~/.gmpw
+for i in louis.bernatchez@bio.ulaval.ca eric.normandeau@bio.ulaval.ca
+do
+    gmailsend.py | \
+        eric.normandeau.qc@gmail.com | \
+        $i | \
+        "Rapport hebdomadaire" | \
+        ~/Desktop/weekly_report.txt | \
+        ~/.gmpw
+done
 
 # Change name of file to contain date (yyyy-mm-dd)
 cd ~/Desktop/
