@@ -22,9 +22,9 @@ class Fastq(object):
         self.name2 = name2
         self.qual = qual
     def write_to_file(self, handle):
-        handle.write(self.name + "\n")
+        handle.write("@" + self.name + "\n")
         handle.write(self.seq + "\n")
-        handle.write(self.name2 + "\n")
+        handle.write("+" + self.name2 + "\n")
         handle.write(self.qual + "\n")
 
 # Defining functions
