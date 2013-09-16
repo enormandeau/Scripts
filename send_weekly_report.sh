@@ -7,11 +7,11 @@ markers_extract_to_screen.py ~/Dropbox/Lab/daily_plan.txt "#BEGIN WEEKLY REPORT"
 # Send report by email
 for i in louis.bernatchez@bio.ulaval.ca eric.normandeau@bio.ulaval.ca
 do
-    gmailsend.py | \
-        eric.normandeau.qc@gmail.com | \
-        $i | \
-        "Rapport hebdomadaire" | \
-        ~/Desktop/weekly_report.txt | \
+    gmailsend.py \
+        eric.normandeau.qc@gmail.com \
+        $i \
+        "Rapport hebdomadaire" \
+        ~/Desktop/weekly_report.txt \
         ~/.gmpw
 done
 
