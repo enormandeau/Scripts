@@ -3,5 +3,5 @@
 
 find . -maxdepth 1 -type d | \
     grep -vE '^.$' | \
-    parallel -j20 'echo -ne "## "{}"\n  " && cd {} && git pull'
+    parallel -k -j20 'echo -ne "## "{}"\n  " && cd {} && git pull'
 
