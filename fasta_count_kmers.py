@@ -1,5 +1,8 @@
 #!/usr/bin/python
 """Return frequency of kmers present in a fasta file
+
+Usage:
+    python fasta_count_kmer.py genome_file kmer_length
 """
 
 # Importing modules
