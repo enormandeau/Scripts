@@ -63,6 +63,6 @@ if __name__ == '__main__':
     sequences = fastq_parser(input_file)
     with open(output_file, "w") as out_f:
         for s in sequences:
-            if s.name not in unwanted:
+            if s.name not in unwanted and s.name.split(" ")[0] not in unwanted:
                 s.write_to_file(out_f)
 
