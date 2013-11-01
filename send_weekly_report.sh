@@ -4,6 +4,9 @@
 # Create report
 markers_extract_to_screen.py ~/Dropbox/Lab/daily_plan.txt "#BEGIN WEEKLY REPORT" "#END WEEKLY REPORT" > ~/Desktop/weekly_report.txt
 
+# Get password
+read -s -p "Email password: " account_password
+
 # Send report by email
 for i in louis.bernatchez@bio.ulaval.ca eric.normandeau@bio.ulaval.ca
 do
@@ -12,7 +15,7 @@ do
         $i \
         "Rapport hebdomadaire" \
         ~/Desktop/weekly_report.txt \
-        ~/.gmpw
+        $account_password
 done
 
 # Change name of file to contain date (yyyy-mm-dd)
