@@ -20,7 +20,7 @@ except:
     sys.exit(0)
 
 stub = "seq_"
-num = 4
+num = 0
 
 def out_name(stub, num):
     return ">" + stub + str("%i" % num) + "\n"
