@@ -20,7 +20,7 @@ except:
     sys.exit(0)
 
 stub = "seq_"
-num = 4
+num = 0
 
 def out_name(stub, num):
     return ">" + stub + str("%i" % num) + "\n"
@@ -28,9 +28,10 @@ def out_name(stub, num):
 with open(result_file, "w") as f:
     for i in xrange(num_seq):
         num += 1
-        seq = ""
+        seq = [] 
         variance = random.randint(-seq_var, seq_var)
         for j in xrange(seq_len + variance):
-            seq += (random.choice(["A", "C", "G", "T"]))
+            seq.append(random.choice(["A", "C", "G", "T"]))
         f.write(out_name(stub, num))
-        f.write(seq + "\n")
+        f.write("".join(seq) + "\n")
+
