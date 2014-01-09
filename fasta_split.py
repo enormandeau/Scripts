@@ -58,7 +58,7 @@ if __name__ == '__main__':
         output_files[n] = open(input_file + str(n) + ".fasta", "w")
 
     # Iterate through sequences and write to files
-    file_number = 1
+    file_number = 0
     for sequence in fasta_iterator(input_file):
         current_file = file_number % num_files
         sequence.write_to_file(output_files[current_file])
