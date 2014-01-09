@@ -60,7 +60,7 @@ if __name__ == '__main__':
     # Iterate through sequences and write to files
     file_number = 0
     for sequence in fasta_iterator(input_file):
-        current_file = file_number % num_files
+        current_file = file_number % num_files + 1
         sequence.write_to_file(output_files[current_file])
         file_number += 1
 
