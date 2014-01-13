@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "       -=( PROCESSING )=-"
+echo "PROCESSING"
 grep -R "^ +\.\." ~/Dropbox/Lab/project_checklists/*.txt | \
-    perl -pe 's/.*\///; s/\*/\t/'
+    perl -pe 's/.*\///; s/\*/\t/; s/^/  /'
 
