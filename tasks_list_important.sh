@@ -2,7 +2,10 @@
 
 clear
 echo "IMPORTANT"
-grep -R "*" ~/Dropbox/Lab/project_checklists/*.txt | \
-    perl -pe 's/.*\///; s/\*/\t/; s/^/  /'
+find /home/labolb/Dropbox/Lab/project_checklists/ -iname "*.txt" | \
+    parallel echo -e "\#\#\# {/.} \#\#\#" \; grep "\*" {} | \
+    grep -B 1 "*" | \
+    grep -v "^--" | \
+    perl -pe 's/\#\#\#/\n\#\#\#/'
 echo
 
