@@ -2,7 +2,8 @@
 clear
 echo "-=( IMPORTANT )=-"
 
-find /home/labolb/Dropbox/Lab/project_checklists/ -iname "*.txt" | \
+find /home/labolb/Dropbox/Lab/project_checklists/ | \
+    grep -v "~" | \
     while read i
     do
         
