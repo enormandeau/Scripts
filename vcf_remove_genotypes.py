@@ -5,7 +5,8 @@ Usage:
     vcf_remove_genotypes.py input_vcf threshold output_vcf
 
 input_vcf = batch_1.vcf (output from Stacks)
-threshold = max percent of missing individuals (0 to 100)
+threshold = min number of individuals (0 to 100)
+#### threshold = max percent of missing individuals (0 to 100)
 output_vcf = filename for output vcf
 """
 
@@ -32,7 +33,8 @@ def treat_line(line, popind, threshold):
             results.append(line_split[i])
         num_ok = len([x for x in results if x != null_geno])
         percent = 100. * num_ok / len(results)
-        if percent < threshold:
+        if num_ok < threshold: ### Integer version
+        # if percent < threshold: ### Percent version
             for i in popind[p]:
                 line_split[i] = null_geno
     return "\t".join(line_split)
