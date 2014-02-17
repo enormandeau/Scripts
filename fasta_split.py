@@ -8,6 +8,7 @@ USAGE:
 
 input_file: fasta file
 num_files: number of files to split into
+
 """
 
 # Importing modules
