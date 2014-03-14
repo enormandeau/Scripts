@@ -67,7 +67,7 @@ if __name__ == '__main__':
                         else:
                             split_genotype = genotype.split(":")
                             call = split_genotype[0]
-                            depth = int(split_genotype[args.column])
+                            depth = int(split_genotype[args.column - 1])
 
                             # Homozygotes
                             if call in ["0/0/0/0", "1/1/1/1", "2/2/2/2"]:
