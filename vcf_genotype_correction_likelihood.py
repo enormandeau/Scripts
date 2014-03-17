@@ -39,11 +39,14 @@ if __name__ == '__main__':
                 
                 elif l:
                     info = l.split("\t")
-                    
                     for i in xrange(9, len(info)):
                         data = info[i].split(":")
+                        num_reads = int(data[2])
                         lh = data[1].split(",")
-                        if data[0] != "./.":
+                        if num_reads == 0:
+                            data[0] = "./."
+                            print 'Replaced a missing genotype'
+                        elif data[0] != "./.":
                             if lh[0] == "0":
                                 data[0] = "0/0"
                             elif lh[1] == "0":
