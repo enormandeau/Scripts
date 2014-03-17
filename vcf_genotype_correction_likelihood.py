@@ -45,7 +45,6 @@ if __name__ == '__main__':
                         lh = data[1].split(",")
                         if num_reads == 0:
                             data[0] = "./."
-                            print 'Replaced a missing genotype'
                         elif data[0] != "./.":
                             if lh[0] == "0":
                                 data[0] = "0/0"
