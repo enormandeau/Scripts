@@ -15,6 +15,8 @@ Usage:
     ./vcf_genotype_correction.py  input_file  output_file
 """
 
+# Version 1.0
+
 # Importing modules
 import sys
 

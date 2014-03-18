@@ -10,6 +10,8 @@ threshold = min number of individuals (0 to 100)
 output_vcf = filename for output vcf
 """
 
+# Version 1.0
+
 # Importing modules
 from collections import defaultdict
 import sys

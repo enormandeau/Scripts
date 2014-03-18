@@ -2,6 +2,8 @@
 """Recall tetraploid genotypes based on the number of reads in a vcf file
 """
 
+# Version 1.0
+
 # Importing modules
 import argparse
 import sys
