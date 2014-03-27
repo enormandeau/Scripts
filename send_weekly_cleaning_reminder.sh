@@ -12,6 +12,7 @@ cat ~/Documents/Menage/menage_cette_semaine_temp.txt
 
 # Get password
 read -s -p "Email password: " account_password
+echo
 
 cat ~/Documents/Menage/menage_eric.txt \
     ~/Documents/Menage/menage_cette_semaine_temp.txt \
