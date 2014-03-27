@@ -7,6 +7,12 @@ nb_people=$(wc -l ~/Documents/Menage/menage_liste.txt | cut -d " " -f 1)
 head -2 ~/Documents/Menage/menage_liste.txt \
     > ~/Documents/Menage/menage_cette_semaine_temp.txt
 
+echo Cette semaine :
+cat ~/Documents/Menage/menage_cette_semaine_temp.txt
+
+# Get password
+read -s -p "Email password: " account_password
+
 cat ~/Documents/Menage/menage_eric.txt \
     ~/Documents/Menage/menage_cette_semaine_temp.txt \
     >  ~/Documents/Menage/menage_cette_semaine.txt
@@ -23,9 +29,6 @@ cat ~/Documents/Menage/menage_message_rappel_francais.txt \
     ~/Documents/Menage/menage_message_rappel_anglais.txt \
     ~/Documents/Menage/menage_cette_semaine_temp.txt \
     > ~/Documents/Menage/menage_message_rappel_cette_semaine.txt
-
-# Get password
-read -s -p "Email password: " account_password
 
 # Send reminder by email
 cat ~/Documents/Menage/menage_cette_semaine.txt | \
