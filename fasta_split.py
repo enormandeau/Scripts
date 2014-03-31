@@ -25,7 +25,7 @@ class Fasta(object):
         handle.write(self.sequence + "\n")
 
 # Defining functions
-def fasta_iterator(object):
+def fasta_iterator(input_file):
     """Takes a fasta file input_file and returns a fasta iterator
     """
     with open(input_file) as f:
