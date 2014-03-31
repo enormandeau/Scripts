@@ -53,15 +53,17 @@ if __name__ == '__main__':
         sys.exit(1)
 
     # Open output files for writting
-    output_files = {}
-    for n in xrange(1, num_files + 1):
-        output_files[n] = open(input_file + str(n) + ".fasta", "w")
+    #output_files = {}
+    #for n in xrange(1, num_files + 1):
+    #    output_files[n] = open(input_file + str(n) + ".fasta", "w")
 
     # Iterate through sequences and write to files
     file_number = 0
     for sequence in fasta_iterator(input_file):
-        current_file = file_number % num_files + 1
-        sequence.write_to_file(output_files[current_file])
+        n = file_number % num_files + 1
+        current_file = input_file + str(n) + ".fasta"
+        with open(current_file, "a") as f:
+            sequence.write_to_file(f)
         file_number += 1
 
     # Close output file handles
