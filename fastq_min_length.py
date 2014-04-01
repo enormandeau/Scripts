@@ -1,15 +1,16 @@
 #!/usr/bin/python
-"""Keep only sequences that reach a minimal length threshold
+"""Keep only sequences that reach a minimal length threshold in a fastq.gz file
 
 Usage:
     python fastq_remove.py  input_file  length_threshold  output_file
 
-input_file = input Fastq file
+input_file = input compressed Fastq file
 length_threshold = minimal acceptable length (positive integer)
 output_file = output Fastq file
 """
 
 # Importing modules
+import gzip
 import sys
 
 # Defining classes
@@ -31,7 +32,7 @@ class Fastq(object):
 def fastq_parser(input_file):
     """Takes a fastq file infile and returns a fastq object iterator
     """
-    with open(input_file) as f:
+    with gzip.open(input_file, "rb") as f:
         while True:
             name = f.readline().strip()[1:]
             if not name:
@@ -55,7 +56,7 @@ if __name__ == '__main__':
 
     # Filter sequences
     sequences = fastq_parser(input_file)
-    with open(output_file, "w") as out_f:
+    with gzip.open(output_file, "wb") as out_f:
         for s in sequences:
             if len(s.seq) >= length_threshold:
                 s.write_to_file(out_f)
