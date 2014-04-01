@@ -1,0 +1,62 @@
+#!/usr/bin/python
+"""Keep only sequences that reach a minimal length threshold
+
+Usage:
+    python fastq_remove.py  input_file  length_threshold  output_file
+
+input_file = input Fastq file
+length_threshold = minimal acceptable length (positive integer)
+output_file = output Fastq file
+"""
+
+# Importing modules
+import sys
+
+# Defining classes
+class Fastq(object):
+    """Fastq object with name and sequence
+    """
+    def __init__(self, name, seq, name2, qual):
+        self.name = name
+        self.seq = seq
+        self.name2 = name2
+        self.qual = qual
+    def write_to_file(self, handle):
+        handle.write("@" + self.name + "\n")
+        handle.write(self.seq + "\n")
+        handle.write("+" + self.name2 + "\n")
+        handle.write(self.qual + "\n")
+
+# Defining functions
+def fastq_parser(input_file):
+    """Takes a fastq file infile and returns a fastq object iterator
+    """
+    with open(input_file) as f:
+        while True:
+            name = f.readline().strip()[1:]
+            if not name:
+                break
+            seq = f.readline().strip()
+            name2 = f.readline().strip()[1:]
+            qual = f.readline().strip()
+            yield Fastq(name, seq, name2, qual)
+
+# Main
+if __name__ == '__main__':
+    try:
+        input_file = sys.argv[1]
+        length_threshold = int(sys.argv[2])
+        output_file = sys.argv[3]
+    except:
+        print __doc__
+        exit(1)
+
+    assert length_threshold >= 1, "length threshold must be a positive integer"
+
+    # Filter sequences
+    sequences = fastq_parser(input_file)
+    with open(output_file, "w") as out_f:
+        for s in sequences:
+            if len(s.seq) >= length_threshold:
+                s.write_to_file(out_f)
+
