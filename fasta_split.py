@@ -66,7 +66,3 @@ if __name__ == '__main__':
             sequence.write_to_file(f)
         file_number += 1
 
-    # Close output file handles
-    for n in xrange(1, num_files + 1):
-        output_files[n].close()
-
