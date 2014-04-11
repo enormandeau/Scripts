@@ -44,7 +44,9 @@ class Fastq(object):
         self.name2 = name2
         self.qual = qual
     def getShortname(self, separator):
-        return self.name.split(separator)[0]
+        self.temp = self.name.split(separator)
+        del(self.temp[-1])
+        return separator.join(self.temp)
     def write_to_file(self, handle):
         handle.write(self.name + "\n")
         handle.write(self.seq + "\n")
