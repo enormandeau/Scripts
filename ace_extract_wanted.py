@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 """Extract wanted contigs from an .ace file into a smaller .ace file.
 

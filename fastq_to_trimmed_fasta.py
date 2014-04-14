@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Take a .fastq file and return a .fasta file where the sequences have been
 trimmed to a specified length.
 

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """
 Unwrap fasta file so that each sequence takes up only one line.
 

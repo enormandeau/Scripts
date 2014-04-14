@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """
 Rename files according to a file containing old and new names in the following
 format:

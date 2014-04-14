@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 """Remove unwanted SNPs from a file containing information about many SNPs.
 

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Find microarray loop design with random loops that minimize multiple
 connections among groups.
 

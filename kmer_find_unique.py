@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """kmer_find_unique.py
 
 Find kmers that are unique to a genome and found in no other genomes

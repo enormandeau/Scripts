@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Compare SNP presence between the UNEAK pipeline and the IBIS pipeline outputs.
 
 Usage:

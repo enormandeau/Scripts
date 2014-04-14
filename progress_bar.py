@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Print a progress bar given a total and a current progress
 
 USAGE:

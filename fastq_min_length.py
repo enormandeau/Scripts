@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Keep only sequences that reach a minimal length threshold in a fastq.gz file
 
 Usage:

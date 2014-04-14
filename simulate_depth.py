@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Simulate depth of coverage on a per nucleotide basis given a genome size, a
 read length, and an average depth
 

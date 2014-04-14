@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Extract start end positions of sequences that blast on transposons
 
 Usage:

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Remove unwanted sequences from a Fastq file
 
 Usage:

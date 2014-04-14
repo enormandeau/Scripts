@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 """Pad all numbers of a file with zeros to a specified number of characters.
 

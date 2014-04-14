@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # cout sequence redondancy in a RAD file
 
 """Count and export redundancy of sequences found in a RAD file.

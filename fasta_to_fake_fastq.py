@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Create a fastq file from a fasta file by adding a fake quality to each
 sequence.
 

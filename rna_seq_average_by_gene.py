@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Average RNA-Seq data by unique genes usign a column with unique gene
 identifiers from a tab separated file with the data of one sequence per line.
 

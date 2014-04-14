@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 """Digest sequences from a fasta file in sequences of a specified length.
 

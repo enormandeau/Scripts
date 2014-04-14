@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Remove genotypes of individuals in populations with few genotyped individuals.
 
 Usage:

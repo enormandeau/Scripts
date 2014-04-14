@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 """Extract wanted SNPs from a file containing information about many SNPs.
 

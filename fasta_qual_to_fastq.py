@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 """Convert a FASTA and a QUAL file from Roche 454 sequencing in a FASTQ file.
 

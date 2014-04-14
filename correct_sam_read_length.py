@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Keep only lines from a SAM file where the sequence length matches the info in column 6 
 
 Usage:

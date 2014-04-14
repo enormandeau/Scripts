@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Correct bad genotype calls in vcf files.
 
 Bad genotypes are called when only a few reads support the rare variant. In

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Recall tetraploid genotypes based on the number of reads in a vcf file
 """
 

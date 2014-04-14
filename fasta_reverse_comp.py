@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 """Extract all lines of a file found between a 'start' and a 'stop' markers.
 

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Split a fasta file into chuncks of at least n nucleotides
 
 Usage:
