@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-"""Keep only sequences that reach a minimal length threshold in a fastq.gz file
+"""Keep only sequences that reach a minimal length and trim the other to that
+length in a fastq.gz file
 
 Usage:
-    python fastq_min_length.py  input_file  length_threshold  output_file
+    python fastq_trim.py  input_file  length_threshold  output_file
 
 input_file = input compressed Fastq file
 length_threshold = minimal acceptable length (positive integer)
@@ -59,5 +60,7 @@ if __name__ == '__main__':
     with gzip.open(output_file, "wb") as out_f:
         for s in sequences:
             if len(s.seq) >= length_threshold:
+                s.seq = s.seq[0:length_threshold]
+                s.qual = s.qual[0:length_threshold]
                 s.write_to_file(out_f)
 
