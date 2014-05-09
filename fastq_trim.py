@@ -3,10 +3,11 @@
 length in a fastq.gz file
 
 Usage:
-    python fastq_trim.py  input_file  length_threshold  output_file
+    python fastq_trim.py  input_file  min_length  max_length  output_file
 
 input_file = input compressed Fastq file
-length_threshold = minimal acceptable length (positive integer)
+min_length = minimal acceptable length (positive integer)
+max_length = maximal acceptable length (positive integer)
 output_file = output Fastq file
 """
 
@@ -47,20 +48,21 @@ def fastq_parser(input_file):
 if __name__ == '__main__':
     try:
         input_file = sys.argv[1]
-        length_threshold = int(sys.argv[2])
-        output_file = sys.argv[3]
+        min_length = int(sys.argv[2])
+        max_length = int(sys.argv[3])
+        output_file = sys.argv[4]
     except:
         print __doc__
         exit(1)
 
-    assert length_threshold >= 1, "length threshold must be a positive integer"
+    assert min_length >= 1, "length threshold must be a positive integer"
 
     # Filter sequences
     sequences = fastq_parser(input_file)
     with gzip.open(output_file, "wb") as out_f:
         for s in sequences:
-            if len(s.seq) >= length_threshold:
-                s.seq = s.seq[0:length_threshold]
-                s.qual = s.qual[0:length_threshold]
+            if len(s.seq) >= min_length:
+                s.seq = s.seq[0:max_length]
+                s.qual = s.qual[0:max_length]
                 s.write_to_file(out_f)
 
