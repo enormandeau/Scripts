@@ -7,6 +7,11 @@ WARNING! This program assumes that the fastq file uses EXACTLY four lines per
 Three output files are generated. The first two files contain the reads of the
     pairs that match and the third contains the solitary reads.
 
+Downloaded from 
+https://raw.githubusercontent.com/enormandeau/Scripts/master/fastqCombinePairedEnd.py
+
+Thanks for Wei-Ju Wu for the .gz related part.
+
 Usage:
     python fastqCombinePairedEnd.py input1 input2 separator
 
@@ -19,7 +24,10 @@ separator = character that separates the name of the read from the part that
 """
 
 # Importing modules
+from collections import namedtuple
 import sys
+import gzip
+import contextlib
 
 # Parsing user input
 try:
@@ -54,10 +62,15 @@ class Fastq(object):
         handle.write(self.qual + "\n")
 
 # Defining functions
+def myopen(infile, mode='r'):
+    return gzip.open(infile, mode=mode) if infile.endswith('.gz') else open(infile, mode=mode)
+
+
 def fastq_parser(infile):
     """Takes a fastq file infile and returns a fastq object iterator
     """
-    with open(infile) as f:
+    
+    with myopen(infile) as f:
         while True:
             name = f.readline().strip()
             if not name:
@@ -75,9 +88,14 @@ if __name__ == "__main__":
     seq2 = fastq_parser(in2)
     s1_finished = False
     s2_finished = False
-    with open(in1 + "_pairs_R1.fastq", "w") as out1:
-        with open(in2 + "_pairs_R2.fastq", "w") as out2:
-            with open(in1 + "_singles.fastq", "w") as out3:
+    if in1.endswith('.gz'): 
+    	outSuffix='.fastq.gz'
+    else:
+    	outSuffix='.fastq'
+    	
+    with myopen(in1 + "_pairs_R1" + outSuffix, "w") as out1:
+        with myopen(in2 + "_pairs_R2" + outSuffix, "w") as out2:
+            with myopen(in1 + "_singles" + outSuffix, "w") as out3:
                 while not (s1_finished and s2_finished):
                     try:
                         s1 = seq1.next()
