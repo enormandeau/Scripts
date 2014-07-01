@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-"""Resynchronize 2 fastq files (R1 and R2) after they have been trimmed and cleaned
+"""Resynchronize 2 fastq or fastq.gz files (R1 and R2) after they have been
+trimmed and cleaned
 
 WARNING! This program assumes that the fastq file uses EXACTLY four lines per
     sequence
@@ -7,16 +8,11 @@ WARNING! This program assumes that the fastq file uses EXACTLY four lines per
 Three output files are generated. The first two files contain the reads of the
     pairs that match and the third contains the solitary reads.
 
-Downloaded from 
-https://raw.githubusercontent.com/enormandeau/Scripts/master/fastqCombinePairedEnd.py
-
-Thanks for Wei-Ju Wu for the .gz related part.
-
 Usage:
     python fastqCombinePairedEnd.py input1 input2 separator
 
-input1 = LEFT  fastq file (R1)
-input2 = RIGHT fastq file (R2)
+input1 = LEFT  fastq or fastq.gz file (R1)
+input2 = RIGHT fastq or fastq.gz file (R2)
 separator = character that separates the name of the read from the part that
     describes if it goes on the left or right, usually with characters '1' or
     '2'.  The separator is often a space, but could be another character. A
@@ -24,10 +20,8 @@ separator = character that separates the name of the read from the part that
 """
 
 # Importing modules
-from collections import namedtuple
-import sys
 import gzip
-import contextlib
+import sys
 
 # Parsing user input
 try:
@@ -62,9 +56,11 @@ class Fastq(object):
         handle.write(self.qual + "\n")
 
 # Defining functions
-def myopen(infile, mode='r'):
-    return gzip.open(infile, mode=mode) if infile.endswith('.gz') else open(infile, mode=mode)
-
+def myopen(infile, mode="r"):
+    if infile.endswith(".gz"):
+        return gzip.open(infile, mode=mode)
+    else:
+        return open(infile, mode=mode)
 
 def fastq_parser(infile):
     """Takes a fastq file infile and returns a fastq object iterator
