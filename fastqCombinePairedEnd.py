@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-"""Resynchronize 2 fastq files (R1 and R2) after they have been trimmed and cleaned
+"""Resynchronize 2 fastq or fastq.gz files (R1 and R2) after they have been
+trimmed and cleaned
 
 WARNING! This program assumes that the fastq file uses EXACTLY four lines per
     sequence
@@ -10,8 +11,8 @@ Three output files are generated. The first two files contain the reads of the
 Usage:
     python fastqCombinePairedEnd.py input1 input2 separator
 
-input1 = LEFT  fastq file (R1)
-input2 = RIGHT fastq file (R2)
+input1 = LEFT  fastq or fastq.gz file (R1)
+input2 = RIGHT fastq or fastq.gz file (R2)
 separator = character that separates the name of the read from the part that
     describes if it goes on the left or right, usually with characters '1' or
     '2'.  The separator is often a space, but could be another character. A
@@ -19,6 +20,7 @@ separator = character that separates the name of the read from the part that
 """
 
 # Importing modules
+import gzip
 import sys
 
 # Parsing user input
@@ -38,15 +40,18 @@ except:
 class Fastq(object):
     """Fastq object with name and sequence
     """
+
     def __init__(self, name, seq, name2, qual):
         self.name = name
         self.seq = seq
         self.name2 = name2
         self.qual = qual
+
     def getShortname(self, separator):
         self.temp = self.name.split(separator)
         del(self.temp[-1])
         return separator.join(self.temp)
+
     def write_to_file(self, handle):
         handle.write(self.name + "\n")
         handle.write(self.seq + "\n")
@@ -54,14 +59,22 @@ class Fastq(object):
         handle.write(self.qual + "\n")
 
 # Defining functions
+def myopen(infile, mode="r"):
+    if infile.endswith(".gz"):
+        return gzip.open(infile, mode=mode)
+    else:
+        return open(infile, mode=mode)
+
 def fastq_parser(infile):
     """Takes a fastq file infile and returns a fastq object iterator
     """
-    with open(infile) as f:
+    
+    with myopen(infile) as f:
         while True:
             name = f.readline().strip()
             if not name:
                 break
+
             seq = f.readline().strip()
             name2 = f.readline().strip()
             qual = f.readline().strip()
@@ -75,9 +88,15 @@ if __name__ == "__main__":
     seq2 = fastq_parser(in2)
     s1_finished = False
     s2_finished = False
-    with open(in1 + "_pairs_R1.fastq", "w") as out1:
-        with open(in2 + "_pairs_R2.fastq", "w") as out2:
-            with open(in1 + "_singles.fastq", "w") as out3:
+
+    if in1.endswith('.gz'): 
+    	outSuffix='.fastq.gz'
+    else:
+    	outSuffix='.fastq'
+    	
+    with myopen(in1 + "_pairs_R1" + outSuffix, "w") as out1:
+        with myopen(in2 + "_pairs_R2" + outSuffix, "w") as out2:
+            with myopen(in1 + "_singles" + outSuffix, "w") as out3:
                 while not (s1_finished and s2_finished):
                     try:
                         s1 = seq1.next()
@@ -99,6 +118,7 @@ if __name__ == "__main__":
                         seq1_dict.pop(s1.getShortname(separator))
                         seq2_dict[s1.getShortname(separator)].write_to_file(out2)
                         seq2_dict.pop(s1.getShortname(separator))
+
                     if not s2_finished and s2.getShortname(separator) in seq1_dict:
                         seq2_dict[s2.getShortname(separator)].write_to_file(out2)
                         seq2_dict.pop(s2.getShortname(separator))
@@ -108,6 +128,7 @@ if __name__ == "__main__":
                 # Treat all unpaired reads
                 for r in seq1_dict.values():
                     r.write_to_file(out3)
+
                 for r in seq2_dict.values():
                     r.write_to_file(out3)
 
