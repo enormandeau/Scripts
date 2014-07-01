@@ -40,15 +40,18 @@ except:
 class Fastq(object):
     """Fastq object with name and sequence
     """
+
     def __init__(self, name, seq, name2, qual):
         self.name = name
         self.seq = seq
         self.name2 = name2
         self.qual = qual
+
     def getShortname(self, separator):
         self.temp = self.name.split(separator)
         del(self.temp[-1])
         return separator.join(self.temp)
+
     def write_to_file(self, handle):
         handle.write(self.name + "\n")
         handle.write(self.seq + "\n")
@@ -71,6 +74,7 @@ def fastq_parser(infile):
             name = f.readline().strip()
             if not name:
                 break
+
             seq = f.readline().strip()
             name2 = f.readline().strip()
             qual = f.readline().strip()
@@ -84,6 +88,7 @@ if __name__ == "__main__":
     seq2 = fastq_parser(in2)
     s1_finished = False
     s2_finished = False
+
     if in1.endswith('.gz'): 
     	outSuffix='.fastq.gz'
     else:
@@ -113,6 +118,7 @@ if __name__ == "__main__":
                         seq1_dict.pop(s1.getShortname(separator))
                         seq2_dict[s1.getShortname(separator)].write_to_file(out2)
                         seq2_dict.pop(s1.getShortname(separator))
+
                     if not s2_finished and s2.getShortname(separator) in seq1_dict:
                         seq2_dict[s2.getShortname(separator)].write_to_file(out2)
                         seq2_dict.pop(s2.getShortname(separator))
@@ -122,6 +128,7 @@ if __name__ == "__main__":
                 # Treat all unpaired reads
                 for r in seq1_dict.values():
                     r.write_to_file(out3)
+
                 for r in seq2_dict.values():
                     r.write_to_file(out3)
 
