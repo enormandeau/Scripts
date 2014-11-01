@@ -15,6 +15,7 @@ output_vcf = filename for output vcf
 # Importing modules
 from collections import defaultdict
 import sys
+import re
 
 # Defining functions
 def population_indexes(pops):
@@ -27,18 +28,19 @@ def population_indexes(pops):
     return d
 
 def treat_line(line, popind, threshold):
-    null_geno = './.:0:.,.,.'
+    repladement_geno = "./.:0:.,.,."
+    null_geno = re.compile("\./\.:[0-9]+:\.,\.,\.")
     line_split = line.split("\t")
     for p in popind:
         results = []
         for i in popind[p]:
             results.append(line_split[i])
-        num_ok = len([x for x in results if x != null_geno])
+        num_ok = len([x for x in results if null_geno.match(x)])
         percent = 100. * num_ok / len(results)
         if num_ok < threshold: ### Integer version
         # if percent < threshold: ### Percent version
             for i in popind[p]:
-                line_split[i] = null_geno
+                line_split[i] = repladement_geno
     return "\t".join(line_split)
 
 # Main
