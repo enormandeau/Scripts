@@ -35,7 +35,7 @@ def treat_line(line, popind, threshold):
         results = []
         for i in popind[p]:
             results.append(line_split[i])
-        num_ok = len([x for x in results if null_geno.match(x)])
+        num_ok = len([x for x in results if not null_geno.match(x)])
         percent = 100. * num_ok / len(results)
         if num_ok < threshold: ### Integer version
         # if percent < threshold: ### Percent version
