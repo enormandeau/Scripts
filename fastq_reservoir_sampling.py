@@ -35,7 +35,7 @@ def myopen(_file, mode="r"):
 def fastq_iterator(input_file):
     """Takes a fastq file infile and returns a fastq object iterator
     """
-    with open(input_file) as f:
+    with myopen(input_file) as f:
         while True:
             name = f.readline().strip()[1:]
             if not name:
@@ -68,7 +68,7 @@ if __name__ == '__main__':
             if rand < number_wanted:
                 retained[random.randrange(number_wanted)] = fastq
     
-    with open(result_file, "w") as outf:
+    with myopen(result_file, "w") as outf:
         for s in retained:
             s.write_to_file(outf)
 
