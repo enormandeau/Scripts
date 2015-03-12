@@ -5,8 +5,9 @@ Usage:
     %program <input_file> n <output_file>"""
 
 # Importing modules
-import sys
 import re
+import sys
+import gzip
 import random
 
 # Defining classes
@@ -25,6 +26,12 @@ class Fastq(object):
         handle.write(self.qual + "\n")
 
 # Defining functions
+def myopen(_file, mode="r"):
+    if _file.endswith(".gz"):
+        return gzip.open(_file, mode=mode)
+    else:
+        return open(_file, mode=mode)
+
 def fastq_iterator(input_file):
     """Takes a fastq file infile and returns a fastq object iterator
     """

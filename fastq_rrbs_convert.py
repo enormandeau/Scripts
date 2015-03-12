@@ -25,11 +25,11 @@ except:
     sys.exit(1)
 
 # Functions
-def myopen(infile, mode="r"):
-    if infile.endswith(".gz"):
-        return gzip.open(infile, mode=mode)
+def myopen(_file, mode="r"):
+    if _file.endswith(".gz"):
+        return gzip.open(_file, mode=mode)
     else:
-        return open(infile, mode=mode)
+        return open(_file, mode=mode)
 
 # Main
 sequences = (s for s in (SeqIO.parse(myopen(infile), "fastq")))
