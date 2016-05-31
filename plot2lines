@@ -1,2 +1,2 @@
 #!/bin/bash
-gnuplot -p -e "set nokey; plot './$1' using 2:1 w l"
+gnuplot -p -e "set nokey; plot './$1' using 2:1 w l; pause -1"
