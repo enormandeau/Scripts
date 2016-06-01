@@ -5,9 +5,10 @@ Usage:
     %program <input_file> n <output_file>"""
 
 # Importing modules
+import random
+import gzip
 import sys
 import re
-import random
 
 # Defining classes
 class Fasta(object):
@@ -21,10 +22,16 @@ class Fasta(object):
         handle.write(self.sequence + "\n")
 
 # Defining functions
+def myopen(_file, mode="r"):
+    if _file.endswith(".gz"):
+        return gzip.open(_file, mode=mode)
+    else:
+        return open(_file, mode=mode)
+
 def fasta_iterator(input_file):
     """Takes a fasta file input_file and returns a fasta iterator
     """
-    with open(input_file) as f:
+    with myopen(input_file) as f:
         sequence = ""
         name = ""
         begun = False
@@ -63,7 +70,7 @@ if __name__ == '__main__':
             if rand < number_wanted:
                 retained[random.randrange(number_wanted)] = fasta
     
-    with open(result_file, "w") as outf:
+    with myopen(result_file, "w") as outf:
         for s in retained:
             outf.write(">" + s.name + "\n")
             outf.write(s.sequence + "\n")
