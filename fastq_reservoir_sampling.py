@@ -5,10 +5,10 @@ Usage:
     %program <input_file> n <output_file>"""
 
 # Importing modules
-import re
-import sys
-import gzip
 import random
+import gzip
+import sys
+import re
 
 # Defining classes
 class Fastq(object):
