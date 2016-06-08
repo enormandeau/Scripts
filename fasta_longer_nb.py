@@ -25,7 +25,7 @@ count = 0
 fasta_sequences = SeqIO.parse(open(fasta_file),'fasta')
 
 for seq in fasta_sequences:
-    if len(seq.seq.tostring()) >= min_len:
+    if len(str(seq.seq)) >= min_len:
         count += 1
 
 print count, "sequences where longer than", min_len, "nucleotides"

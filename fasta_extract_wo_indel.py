@@ -28,7 +28,7 @@ fasta_sequences = SeqIO.parse(open(fasta_file),'fasta')
 
 for seq in fasta_sequences:
     name = seq.id
-    s = seq.seq.tostring()
+    s = str(seq.seq)
     if name in wanted:
         f.write(">" + name + "\n" + s.replace("*", "") + "\n")
 

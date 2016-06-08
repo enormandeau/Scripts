@@ -45,5 +45,5 @@ while True:
                     print "WARNING: Number of sequences not a multiple of %i"\
                            % nb_sequences
                 sys.exit(0)
-            f.write(">" + seq.name + "\n" + seq.seq.tostring() + "\n")
+            f.write(">" + seq.name + "\n" + str(seq.seq) + "\n")
 

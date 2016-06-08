@@ -27,6 +27,6 @@ fasta_sequences = SeqIO.parse(open(fasta_file),'fasta')
 
 with open(result_file, "w") as f:
     for seq in fasta_sequences:
-        if len(seq.seq.tostring()) >= min_length:
+        if len(str(seq.seq)) >= min_length:
             SeqIO.write([seq], f, "fasta")
 

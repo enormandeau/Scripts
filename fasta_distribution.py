@@ -29,7 +29,7 @@ d = defaultdict(int)
 
 fasta_sequences = SeqIO.parse(open(fasta_file),'fasta')
 for seq in fasta_sequences:
-    d[seq.seq.tostring()] += 1
+    d[str(seq.seq)] += 1
 
 print "There where %s different sequences" % (len(d))
 fasta_sequences.close()

@@ -37,6 +37,6 @@ fasta_sequences = SeqIO.parse(open(fasta_file),'fasta')
 with open(result_file, "w") as f:
     for seq in fasta_sequences:
         name = seq.name
-        if name not in remove and len(seq.seq.tostring()) > 0:
+        if name not in remove and len(str(seq.seq)) > 0:
             SeqIO.write([seq], f, "fasta")
 

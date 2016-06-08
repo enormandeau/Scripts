@@ -41,6 +41,6 @@ with open(result_file, "w") as f:
         for r in remove:
             if name.startswith(r):
                 to_remove = True
-        if to_remove == False and len(seq.seq.tostring()) > 0:
+        if to_remove == False and len(str(seq.seq)) > 0:
             SeqIO.write([seq], f, "fasta")
 

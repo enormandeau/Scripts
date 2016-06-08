@@ -28,7 +28,7 @@ outbad = open(output_bad, "w")
 
 for seq in SeqIO.parse(open(fasta_file),'fasta'):
     name = seq.id
-    sequence = seq.seq.tostring()
+    sequence = str(seq.seq)
     if not sequence.find("N") > -1:
         SeqIO.write([seq], outgood, "fasta")
     else:

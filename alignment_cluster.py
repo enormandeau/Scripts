@@ -170,7 +170,7 @@ if __name__ == "__main__":
             for j in xrange(i - 1):
                 s1 = fasta_sequences[i]
                 s2 = fasta_sequences[j + 1]
-                if score_sequences(s1.seq.tostring(), s2.seq.tostring(),
+                if score_sequences(str(s1.seq), str(s2.seq),
                     mismatch, indel) <= cutoff:
                     f.write(s1.id + " " + s2.id + "\n")
     

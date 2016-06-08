@@ -48,7 +48,7 @@ def get_longest(cluster, fasta, output):
             name = seq.id
         except:
             print name, "no info"
-        sequence = seq.seq.tostring()
+        sequence = str(seq.seq)
         seq_length = len(sequence)
         if name in seqs:
             if seq_length > clusters[seqs[name]][2]:

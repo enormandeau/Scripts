@@ -264,7 +264,7 @@ if __name__ == "__main__":
     
     for seq in fasta_sequences:
         names.append(seq.id)
-        sequences.append(seq.seq.tostring())
+        sequences.append(str(seq.seq))
     
 #    print "  -", len(sequences[0]), len(sequences)
     if lefttrim > 0:

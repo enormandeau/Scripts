@@ -94,10 +94,10 @@ def create_paml_files(in_file, out_file, numseq):
                     break
             if end == 0:
                 f.write(str(len(sequences)) + "\t" +
-                        str(len(sequences[0].seq.tostring())) + "\n")
+                        str(len(str(sequences[0].seq))) + "\n")
                 for i, seq in enumerate(sequences):
                     f.write("allele" + str(i + 1) + "\n")
-                    f.write(seq.seq.tostring() + "\n")
+                    f.write(str(seq.seq) + "\n")
 
 
 # Main function

@@ -92,7 +92,7 @@ def clean_alignment(in_file, out_file, numseq):
             for i in xrange(numseq):
                 try:
                     temp_fasta = fasta_sequences.next()
-                    name, sequence = temp_fasta.id, temp_fasta.seq.tostring()
+                    name, sequence = temp_fasta.id, str(temp_fasta)
                     sequences.append([name, sequence])
                 except:
                     end = 1
