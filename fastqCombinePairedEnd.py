@@ -28,7 +28,7 @@ try:
     in1 = sys.argv[1]
     in2 = sys.argv[2]
 except:
-    print __doc__
+    print(__doc__)
     sys.exit(1)
 
 try:
