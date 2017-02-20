@@ -6,6 +6,7 @@ Usage:
 """
 
 # Modules
+import gzip
 import sys
 
 # Defining classes
