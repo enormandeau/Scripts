@@ -16,7 +16,10 @@ input2 = RIGHT fastq or fastq.gz file (R2)
 separator = character that separates the name of the read from the part that
     describes if it goes on the left or right, usually with characters '1' or
     '2'.  The separator is often a space, but could be another character. A
-    space is used by default.
+    space is used by default. If the sequence names do not contain two parts
+    and you want to use the full name info to pair your sequences, use 'None'
+    (as text) for the separator. Eg:
+        python fastqCombinePairedEnd.py input1 input2 None
 """
 
 # Importing modules
@@ -33,6 +36,8 @@ except:
 
 try:
     separator = sys.argv[3]
+    if separator == "None":
+        separator = None
 except:
     separator = " "
 
@@ -48,9 +53,12 @@ class Fastq(object):
         self.qual = qual
 
     def getShortname(self, separator):
-        self.temp = self.name.split(separator)
-        del(self.temp[-1])
-        return separator.join(self.temp)
+        if separator:
+            self.temp = self.name.split(separator)
+            del(self.temp[-1])
+            return separator.join(self.temp)
+        else:
+            return self.name
 
     def write_to_file(self, handle):
         handle.write(self.name + "\n")
