@@ -44,7 +44,9 @@ def fasta_iterator(input_file):
                 begun = True
             else:
                 sequence += line
-        yield Fasta(name, sequence)
+
+        if name != "":
+            yield Fasta(name, sequence)
 
 def split_sequence(sequence, min_len):
     """Takes a Fasta object and split on N repeats of min_len or more

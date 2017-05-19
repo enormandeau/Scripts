@@ -44,7 +44,9 @@ def fasta_iterator(input_file):
                 begun = True
             else:
                 sequence += line
-        yield Fasta(name, sequence)
+
+        if name != "":
+            yield Fasta(name, sequence)
 
 def kmer_iterator(seq, kmer_length):
     """Takes a Fasta object and returns a kmer iterator

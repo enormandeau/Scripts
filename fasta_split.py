@@ -42,7 +42,9 @@ def fasta_iterator(input_file):
                 begun = True
             else:
                 sequence += line
-        yield Fasta(name, sequence)
+
+        if name != "":
+            yield Fasta(name, sequence)
 
 if __name__ == '__main__':
     try:
