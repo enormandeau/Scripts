@@ -1,11 +1,13 @@
 #!/usr/bin/env python
-"""Convert fastq to fasta
+# -*- coding: utf-8 -*-
+
+"""Extract sequences from a fastq file if their name is in a 'wanted' file.
+
+Wanted file contains one sequence name per line.
 
 Usage:
-    python fastq_to_fastq.py inputFile outputFile
-"""
+    %program <input_file> <wanted_file> <output_file>"""
 
-# Modules
 import gzip
 import sys
 
@@ -51,18 +53,31 @@ def fastq_parser(infile):
             qual = f.readline().strip()
             yield Fastq(name, seq, name2, qual)
 
-# Parsing user input
 try:
-    infile = sys.argv[1]
-    outfile = sys.argv[2]
+    fasta_file = sys.argv[1]  # Input fasta file
+    wanted_file = sys.argv[2] # Input wanted file, one gene name per line
+    result_file = sys.argv[3] # Output fasta file
 except:
     print __doc__
-    sys.exit(1)
+    sys.exit(0)
 
-# Create sequence iterator
-sequences = fastq_parser(infile)
+wanted = set()
+with open(wanted_file) as f:
+    for line in f:
+        line = line.strip()
+        if line != "":
+            wanted.add(line)
 
-# Treating the sequences
-with open(outfile, "w") as ofile:
-    for s in sequences:
-        s.write_fasta(ofile)
+if not wanted:
+    sys.exit()
+
+fastq_sequences = fastq_parser(fasta_file)
+
+with open(result_file, "w") as f:
+    for seq in fastq_sequences:
+        name = seq.name.split(" ")[0]
+        if name in wanted and len(seq.sequence) > 0:
+            wanted.remove(name) # Output only the first appearance for a name
+            seq.write_fastq(f)
+
+

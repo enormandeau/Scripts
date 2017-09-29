@@ -10,7 +10,6 @@ Usage:
 
 import gzip
 import sys
-import re
 
 class Fasta(object):
     """Fasta object with name and sequence
