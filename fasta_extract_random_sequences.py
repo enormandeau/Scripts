@@ -25,7 +25,7 @@ import random
 try:
     from Bio import SeqIO
 except:
-    print "This program requires the Biopython library"
+    print("This program requires the Biopython library")
     sys.exit(0)
 
 # Parsing user input
@@ -34,7 +34,7 @@ try:
     n = int(sys.argv[2]) # Number of sequences wanted
     result_file = sys.argv[3] # Output fasta file
 except:
-    print __doc__
+    print(__doc__)
     sys.exit(0)
 
 # Main
@@ -42,11 +42,11 @@ if __name__ == '__main__':
     n_sequences = SeqIO.convert(fasta_file, "fasta", "/dev/null", "fasta")
 
     if n_sequences < n:
-        print "There are %i sequences in the file, will extract all sequences" % (n_sequences)
+        print("There are %i sequences in the file, will extract all sequences" % (n_sequences))
         n_sequences = n
 
     odd = float(n) / n_sequences
-    print "Treating %s\nwanted: %i, in file: %i, odd"  % (fasta_file, n, n_sequences, odd)
+    print("Treating %s\nwanted: %i, in file: %i, odd"  % (fasta_file, n, n_sequences, odd))
 
     fasta_sequences = SeqIO.parse(open(fasta_file),'fasta')
     seq_num = 0

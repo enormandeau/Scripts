@@ -47,7 +47,7 @@ def get_longest(cluster, fasta, output):
         try:
             name = seq.id
         except:
-            print name, "no info"
+            print(name, "no info")
         sequence = str(seq.seq)
         seq_length = len(sequence)
         if name in seqs:
@@ -100,13 +100,13 @@ def help():
     __revision_date__, name)
     
     if _plateform != 'Windows' and "this is great news":
-        print text
+        print(text)
     else:
         __Windows__ = "This is an abomination"
         remove = ["\033[1m","\033[0m","\033[4m"]
         for i in remove:
             text = text.replace(i, "")
-        print text
+        print(text)
         del(__Windows__) # If only we could...
 
 
@@ -119,7 +119,7 @@ def main():
         opts, args = getopt.getopt(sys.argv[1:], "hc:f:o:", ["help",
             "cluster=", "fasta=", "output="])
     except getopt.GetoptError, e:
-        print "Input error. Use -h for help"
+        print("Input error. Use -h for help")
         sys.exit(0)
     output_file = None
     header = True
@@ -138,27 +138,27 @@ def main():
         with open(cluster_file) as test:
             pass
     except:
-        print "Input Error: No cluster file specified or file not found."
-        print "Use -h for help."
+        print("Input Error: No cluster file specified or file not found.")
+        print("Use -h for help.")
         sys.exit(0)
     try:
         with open(fasta_file) as test:
             pass
     except:
-        print "Input Error: No fasta file specified or file not found."
-        print "Use -h for help."
+        print("Input Error: No fasta file specified or file not found.")
+        print("Use -h for help.")
         sys.exit(0)
     try:
         with open(output_file, "w") as test:
             pass
     except:
-        print "Output Error: No output file specified or incorect path."
-        print "Use -h for help."
+        print("Output Error: No output file specified or incorect path.")
+        print("Use -h for help.")
         sys.exit(0)
 
-    print "Using version:", __version__, "of", __program_name__
-    print "Last revision:", __revision_date__
-    print "By:", __authors__
+    print("Using version:", __version__, "of", __program_name__)
+    print("Last revision:", __revision_date__)
+    print("By:", __authors__)
     print
         
     get_longest(cluster_file, fasta_file, output_file)

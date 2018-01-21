@@ -1,9 +1,11 @@
+*.fasta
+*.fastq
+*.log
+*.odt
+*.pyc
+*.swp
 *private*
 *test*
-*.swp
-*.odt
-*.log
 *~
-TODO
 Makefile
-
+TODO

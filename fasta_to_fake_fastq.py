@@ -20,7 +20,7 @@ if __name__ == '__main__':
         fasta = sys.argv[1]
         fastq = sys.argv[2]
     except:
-        print __doc__
+        print(__doc__)
         sys.exit(1)
     try:
         symbol = sys.argv[3]

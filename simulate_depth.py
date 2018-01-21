@@ -27,9 +27,9 @@ if __name__ == '__main__':
 
     genome = [0] * genome_size
     num_reads = int(float(genome_size) * average_coverage / read_length)
-    for read in xrange(num_reads):
+    for read in range(num_reads):
         start = random.randint(0, genome_size - read_length)
-        for position in xrange(start, start + read_length):
+        for position in range(start, start + read_length):
             genome[position] += 1
     print genome
 

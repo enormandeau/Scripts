@@ -12,7 +12,7 @@ import re
 try:
     from Bio import SeqIO
 except:
-    print "This program requires the Biopython library"
+    print("This program requires the Biopython library")
     sys.exit(0)
 
 try:
@@ -20,7 +20,7 @@ try:
     min_coverage = int(sys.argv[2]) # Minimum coverage of sequence
     result_file = sys.argv[3]     # Output fasta file
 except:
-    print __doc__
+    print(__doc__)
     sys.exit(0)
 
 fasta_sequences = SeqIO.parse(open(fasta_file),'fasta')

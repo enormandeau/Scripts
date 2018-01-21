@@ -16,7 +16,7 @@ try:
     num_seq = int(sys.argv[3])  # Number of sequences
     result_file = sys.argv[4]   # Output fasta file
 except:
-    print __doc__
+    print(__doc__)
     sys.exit(0)
 
 stub = "seq_"
@@ -26,11 +26,11 @@ def out_name(stub, num):
     return ">" + stub + str("%i" % num) + "\n"
 
 with open(result_file, "w") as f:
-    for i in xrange(num_seq):
+    for i in range(num_seq):
         num += 1
         seq = [] 
         variance = random.randint(-seq_var, seq_var)
-        for j in xrange(seq_len + variance):
+        for j in range(seq_len + variance):
             seq.append(random.choice(["A", "C", "G", "T"]))
         f.write(out_name(stub, num))
         f.write("".join(seq) + "\n")

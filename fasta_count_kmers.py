@@ -52,14 +52,14 @@ if __name__ == '__main__':
         input_file = sys.argv[1]
         kmer_length = int(sys.argv[2])
     except:
-        print __doc__
+        print(__doc__)
         sys.exit(1)
 
     # Cound kmers
     kmer_dict = defaultdict(int)
 
     for seq in fasta_iterator(input_file):
-        for start in xrange(0, len(seq.sequence) - kmer_length):
+        for start in range(0, len(seq.sequence) - kmer_length):
             stop = start + kmer_length
             kmer_dict[seq.sequence[start: stop]] += 1
 
@@ -67,5 +67,5 @@ if __name__ == '__main__':
 
     # Print results
     for kmer in kmer_list:
-        print kmer[1], kmer[0]
+        print(kmer[1], kmer[0])
 

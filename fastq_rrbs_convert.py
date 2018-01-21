@@ -43,7 +43,7 @@ with myopen(outfile, "w") as outf:
         if "".join(converted[-3:]) == "CCG":
             end = len(converted) - 3
 
-        for i in xrange(3, end):
+        for i in range(3, end):
             if converted[i] == "T" and proportion > random.random():
                 converted[i] = "C"
 

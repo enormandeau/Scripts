@@ -15,7 +15,7 @@ import re
 try:
     from Bio import SeqIO
 except:
-    print "This program requires the Biopython library"
+    print("This program requires the Biopython library")
     sys.exit(0)
 
 try:
@@ -23,7 +23,7 @@ try:
     nb_sequences = int(sys.argv[2]) # Number of sequences per group
     result_file = sys.argv[3]       # Output fasta filename stub eg: my_genes
 except:
-    print __doc__
+    print(__doc__)
     sys.exit(0)
 
 fasta_sequences = SeqIO.parse(open(fasta_file),'fasta')
@@ -40,9 +40,9 @@ while True:
                 seq = fasta_sequences.next()
                 total_seq += 1
             except:
-                print "All sequences treated"
+                print("All sequences treated")
                 if total_seq % nb_sequences != 0:
-                    print "WARNING: Number of sequences not a multiple of %i"\
+                    print("WARNING: Number of sequences not a multiple of %i"\)
                            % nb_sequences
                 sys.exit(0)
             f.write(">" + seq.name + "\n" + str(seq.seq) + "\n")

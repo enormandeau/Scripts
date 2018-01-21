@@ -47,9 +47,9 @@ def best_blast_results(in_file, out_file):
             best_result = ["NoID", "No hits found", 1]
             for result in results:
                 if result[0].find("No hits found") >= 0:# or result[0] == "":
-                    print "#####" + result[0]
+                    print("#####" + result[0])
                     continue
-                print result[2], float(result[2])
+                print(result[2], float(result[2]))
                 evalue = float(result[2])
                 best_evalue = float(best_result[2])
                 result = list(result)
@@ -115,19 +115,19 @@ def help():
 %s %s           %s         %s(1)
 """%(name, name, name, name, name, __authors__, name, __version__, __revision_date__, name)    
     if _plateform != 'Windows' and "this is cool":
-        print text
+        print(text)
     else:
         remove = ["\033[1m","\033[0m","\033[4m"]
         for i in remove:
             text = text.replace(i, "")
-        print text
+        print(text)
 
 def main():
     try:
         opts, args = getopt.getopt(sys.argv[1:], "hi:o:", ["help",
                      "input=", "output="])
     except getopt.GetoptError, e:
-        print "Input error. Use -h for help"
+        print("Input error. Use -h for help")
         sys.exit(0)
     for option, value in opts:
         if option in ('-h', '--help'):
@@ -142,8 +142,8 @@ def main():
         with open(input_file) as test:
             pass
     except:
-        print "Input Error: No ACE file specified or file not found."
-        print "Use -h for help."
+        print("Input Error: No ACE file specified or file not found.")
+        print("Use -h for help.")
         sys.exit(0)
     
     best_blast_results(input_file, output_file)

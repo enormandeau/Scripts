@@ -34,7 +34,7 @@ class fasta_parser():
                         self.sequences[-1].s += l
     def __str__(self):
         for s in self.sequences:
-            print s
+            print(s)
 
 
 seqs = []

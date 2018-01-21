@@ -25,10 +25,10 @@ def out_name(stub, num):
     return ">" + stub + str("%i" % num) + "\n"
 
 with open(result_file, "w") as f:
-    for i in xrange(num_seq):
+    for i in range(num_seq):
         num += 1
         seq = ""
-        for j in xrange(seq_len):
+        for j in range(seq_len):
             seq += (choice(["A", "C", "G", "T"]))
         f.write(out_name(stub, num))
         f.write(seq + "\n")

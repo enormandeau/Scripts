@@ -56,7 +56,7 @@ if __name__ == '__main__':
 
     # Open output files for writting
     #output_files = {}
-    #for n in xrange(1, num_files + 1):
+    #for n in range(1, num_files + 1):
     #    output_files[n] = open(input_file + str(n) + ".fasta", "w")
 
     # Iterate through sequences and write to files

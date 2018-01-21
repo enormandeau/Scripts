@@ -53,7 +53,7 @@ try:
     max_length = int(sys.argv[2]) # Maximum length of sequence
     result_file = sys.argv[3]     # Output fasta file
 except:
-    print __doc__
+    print(__doc__)
     sys.exit(0)
 
 fasta_sequences = fasta_iterator(fasta_file)

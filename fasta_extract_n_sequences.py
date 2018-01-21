@@ -11,7 +11,7 @@ import re
 try:
     from Bio import SeqIO
 except:
-    print "This program requires the Biopython library"
+    print("This program requires the Biopython library")
     sys.exit(0)
 
 # Parsing user input
@@ -20,7 +20,7 @@ try:
     n = int(sys.argv[2]) # Number of sequences wanted
     result_file = sys.argv[3] # Output fasta file
 except:
-    print __doc__
+    print(__doc__)
     sys.exit(0)
 
 # Main

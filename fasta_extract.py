@@ -54,7 +54,7 @@ try:
     wanted_file = sys.argv[2] # Input wanted file, one gene name per line
     result_file = sys.argv[3] # Output fasta file
 except:
-    print __doc__
+    print(__doc__)
     sys.exit(0)
 
 wanted = set()

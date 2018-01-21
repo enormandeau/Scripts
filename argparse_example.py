@@ -26,4 +26,4 @@ args = parser.parse_args()
 
 # Use arguments
 if args.verbose:
-    print "You talk the talk"
+    print("You talk the talk")
