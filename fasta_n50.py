@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 """Calculate N50 from an assembled genome fasta file
 
 Usage:
