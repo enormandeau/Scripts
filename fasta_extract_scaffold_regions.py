@@ -3,6 +3,9 @@
 
 Usage:
     <program> input_genome wanted_file flanking_size output_fasta
+
+Where:
+    wanted_files contains two tab separated columns with scaffold name and position
 """
 
 # Modules
