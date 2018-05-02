@@ -120,7 +120,9 @@ with open(output_fasta, "w") as outfile:
     for s in sequences:
         if s.sequence in retained[s.name]:
             print("Already here")
+            print(s.name)
+            print(retained[s.name])
+            print()
         else:
-            print("New sequence")
             retained[s.name].add(s.sequence)
             s.write_to_file(outfile)
