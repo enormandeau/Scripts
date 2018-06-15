@@ -4,7 +4,7 @@
 """Extract fasta sequences that are below a maximal length.
 
 Usage:
-    %program <input_file> <output_file>"""
+    %program <input_file> <max_length> <output_file>"""
 
 import gzip
 import sys
