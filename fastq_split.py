@@ -1,5 +1,5 @@
-#!/usr/bin/env python
-"""Remove unwanted sequences from a Fastq file
+#!/usr/bin/env python2
+"""Split a fastq file in n files of approximately the same number of sequences
 
 Usage:
     python fastq_remove.py  input_file  num_seq_per_file
