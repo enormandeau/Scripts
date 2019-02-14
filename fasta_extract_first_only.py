@@ -73,4 +73,5 @@ with open(result_file, "w") as f:
     for seq in fasta_sequences:
         name = seq.name.split(" ")[0]
         if name in wanted and len(seq.sequence) > 0:
+            wanted.remove(name) # Output only the first appearance for a name
             seq.write_to_file(f)
