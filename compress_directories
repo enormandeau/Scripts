@@ -1,3 +1,9 @@
 #!/bin/bash
-time find ./ -maxdepth 1 -type d -print | grep -v '^./$' | while read i; do tar cvf - $i | pigz > $i'.tgz'; done
-
+time find ./ -maxdepth 1 -type d -print |
+    grep -v '^./$' |
+    sort -V |
+    while read i
+    do
+        tar cvf - "$i" |
+            pigz > "$i".tgz
+    done
