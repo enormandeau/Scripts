@@ -8,6 +8,7 @@ Usage:
 # Importing modules
 from signal import signal, SIGPIPE, SIG_DFL
 from collections import defaultdict
+import gzip
 import sys
 
 # Defining classes
@@ -22,10 +23,17 @@ class Fasta(object):
         handle.write(self.sequence + "\n")
 
 # Defining functions
+def myopen(_file, mode="r"):
+    if _file.endswith(".gz"):
+        return gzip.open(_file, mode=mode)
+
+    else:
+        return open(_file, mode=mode)
+
 def fasta_iterator(input_file):
     """Takes a fasta file input_file and returns a fasta iterator
     """
-    with open(input_file) as f:
+    with myopen(input_file) as f:
         sequence = ""
         name = ""
         begun = False
