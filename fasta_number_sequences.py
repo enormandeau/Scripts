@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """Change the names of fasta sequences in a file and number them.
 
@@ -20,8 +20,8 @@ try:
     in_file = open(sys.argv[1])
     out_file = open(sys.argv[2], "w")
 except:
-    print __doc__
-    sys.exit[0]
+    print(__doc__)
+    sys.exit(1)
 
 try:
     stub = sys.argv[3]
