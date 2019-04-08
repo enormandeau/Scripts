@@ -2,7 +2,7 @@
 """Calculate N50 from an assembled genome fasta file
 
 Usage:
-    python fasta_n50.py genome_file
+    python fasta_n50.py genome_file [min_length]
 """
 
 # Importing modules
@@ -62,15 +62,26 @@ if __name__ == '__main__':
         print(__doc__)
         sys.exit(1)
 
+    try:
+        min_length = int(sys.argv[2])
+    except:
+        min_length = 1
+
+    print("Including contigs/scaffolds with at least " + str(min_length) + " bp")
+
     # Cound kmers
     sequence_lengths = []
 
     for seq in fasta_iterator(input_file):
-        sequence_lengths.append(len(seq.sequence))
+        length = len(seq.sequence)
+        if length >= min_length:
+            sequence_lengths.append(len(seq.sequence))
 
     sequence_lengths = sorted(sequence_lengths, reverse=True)
     total_length = sum(sequence_lengths)
     half_length = float(total_length) / 2.0
+
+    print("Genome size: " + str(total_length))
 
     cumulative_length = 0
     for seq_len in sequence_lengths:
