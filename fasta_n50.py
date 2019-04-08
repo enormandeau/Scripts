@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 """Calculate N50 from an assembled genome fasta file
 
 Usage:
@@ -59,7 +59,7 @@ if __name__ == '__main__':
     try:
         input_file = sys.argv[1]
     except:
-        print __doc__
+        print(__doc__)
         sys.exit(1)
 
     # Cound kmers
@@ -68,7 +68,7 @@ if __name__ == '__main__':
     for seq in fasta_iterator(input_file):
         sequence_lengths.append(len(seq.sequence))
 
-    sequence_lengths = sorted(sequence_lengths)
+    sequence_lengths = sorted(sequence_lengths, reverse=True)
     total_length = sum(sequence_lengths)
     half_length = float(total_length) / 2.0
 
@@ -76,6 +76,6 @@ if __name__ == '__main__':
     for seq_len in sequence_lengths:
         cumulative_length += seq_len
         if cumulative_length >= half_length:
-            print "N50:", seq_len
+            print("N50: " + str(seq_len))
             break
 

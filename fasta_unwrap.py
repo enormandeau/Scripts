@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Unwrap fasta file so that each sequence takes up only one line.
 
@@ -11,14 +11,14 @@ import sys
 try:
     from Bio import SeqIO
 except:
-    print "This program requires the Biopython library"
+    print("This program requires the Biopython library")
     sys.exit(0)
 
 try:
     in_file = open(sys.argv[1], "rU")
     out_file = open(sys.argv[2], "w")
 except:
-    print __doc__
+    print(__doc__)
     sys.exit(0)
 
 sequences = ([seq.id, seq.seq.tostring()] for seq in SeqIO.parse(in_file, 'fasta'))
