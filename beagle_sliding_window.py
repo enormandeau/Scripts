@@ -24,11 +24,12 @@ def myopen(_file, mode="rt"):
 def write_to_file(header, snps):
 
     if len(snps):
+        scaffold = snps[0].split()[0].split("_")[0]
         first_pos = snps[0].split()[0].split("_")[1]
         last_pos = snps[-1].split()[0].split("_")[1]
         filename = os.path.join(
                 output_folder,
-                "window_" + first_pos + "-" + last_pos + "_" + str(len(snps)) + "_snps.beagle.gz"
+                "window_" + scaffold + "_" + first_pos + "-" + last_pos + "_" + str(len(snps)) + "_snps.beagle.gz"
                 )
 
         with myopen(filename, "wt") as outfile:
