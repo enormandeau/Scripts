@@ -37,7 +37,7 @@ while True:
         for i in range(nb_sequences):
             try:
                 name = ""
-                seq = fasta_sequences.next()
+                seq = next(fasta_sequences)
                 total_seq += 1
             except:
                 print("All sequences treated")

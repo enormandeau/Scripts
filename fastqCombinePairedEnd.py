@@ -107,11 +107,11 @@ if __name__ == "__main__":
             with myopen(in1 + "_singles" + outSuffix, "w") as out3:
                 while not (s1_finished and s2_finished):
                     try:
-                        s1 = seq1.next()
+                        s1 = next(seq1)
                     except:
                         s1_finished = True
                     try:
-                        s2 = seq2.next()
+                        s2 = next(seq2)
                     except:
                         s2_finished = True
 
@@ -139,4 +139,3 @@ if __name__ == "__main__":
 
                 for r in seq2_dict.values():
                     r.write_to_file(out3)
-
