@@ -67,7 +67,7 @@ class Fastq(object):
         handle.write(self.qual + "\n")
 
 # Defining functions
-def myopen(infile, mode="r"):
+def myopen(infile, mode="rt"):
     if infile.endswith(".gz"):
         return gzip.open(infile, mode=mode)
     else:
@@ -102,9 +102,9 @@ if __name__ == "__main__":
     else:
     	outSuffix='.fastq'
     	
-    with myopen(in1 + "_pairs_R1" + outSuffix, "w") as out1:
-        with myopen(in2 + "_pairs_R2" + outSuffix, "w") as out2:
-            with myopen(in1 + "_singles" + outSuffix, "w") as out3:
+    with myopen(in1 + "_pairs_R1" + outSuffix, "wt") as out1:
+        with myopen(in2 + "_pairs_R2" + outSuffix, "wt") as out2:
+            with myopen(in1 + "_singles" + outSuffix, "wt") as out3:
                 while not (s1_finished and s2_finished):
                     try:
                         s1 = next(seq1)
