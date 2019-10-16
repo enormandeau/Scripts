@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """Convert fastq to fasta
 
 Usage:
@@ -26,8 +26,8 @@ class Fastq(object):
         return separator.join(self.temp)
 
     def write_fastq(self, handle):
-        handle.write(">" + self.name + "\n")
-        handle.write(self.seq + "\n")
+        handle.write(">" + str(self.name) + "\n")
+        handle.write(str(self.seq) + "\n")
 
 # Defining functions
 def myopen(infile, mode="r"):
@@ -56,13 +56,13 @@ try:
     infile = sys.argv[1]
     outfile = sys.argv[2]
 except:
-    print __doc__
+    print(__doc__)
     sys.exit(1)
 
 # Create sequence iterator
 sequences = fastq_parser(infile)
 
 # Treating the sequences
-with open(outfile, "w") as ofile:
+with myopen(outfile, "wt") as ofile:
     for s in sequences:
-        s.write_fasta(ofile)
+        s.write_fastq(ofile)
