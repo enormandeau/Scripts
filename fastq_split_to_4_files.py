@@ -72,10 +72,10 @@ except:
     sys.exit(1)
 
 # Open output file handles
-out1 = gzip.open(input_fastq_file + ".1", "wt")
-out2 = gzip.open(input_fastq_file + ".2", "wt")
-out3 = gzip.open(input_fastq_file + ".3", "wt")
-out4 = gzip.open(input_fastq_file + ".4", "wt")
+out1 = gzip.open(input_fastq_file + ".1.gz", "wt")
+out2 = gzip.open(input_fastq_file + ".2.gz", "wt")
+out3 = gzip.open(input_fastq_file + ".3.gz", "wt")
+out4 = gzip.open(input_fastq_file + ".4.gz", "wt")
 
 # Read and split file
 sequences = fastq_iterator(input_fastq_file)
