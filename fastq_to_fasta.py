@@ -30,7 +30,7 @@ class Fastq(object):
         handle.write(str(self.seq) + "\n")
 
 # Defining functions
-def myopen(infile, mode="r"):
+def myopen(infile, mode="rt"):
     if infile.endswith(".gz"):
         return gzip.open(infile, mode=mode)
     else:
