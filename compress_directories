@@ -4,6 +4,5 @@ time find ./ -maxdepth 1 -type d -print |
     sort -V |
     while read i
     do
-        tar cvf - "$i" |
-            pigz > "$i".tgz
+        tar cvf - "$i" | pigz > "$i".tgz
     done
