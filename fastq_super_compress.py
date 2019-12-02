@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Strip names and introduce fake quality string [III...] to improve fastq compressibility
+"""Strip names and introduce fake quality string [GGGGG...] to improve fastq compressibility
 
 WARNING:
     Sequence names and qualities are lost in the process. This may be fine for
@@ -67,7 +67,7 @@ def fastq_iterator(infile):
             sequence = f.readline().strip()
             name2 = f.readline().strip()
             quality = f.readline().strip()
-            yield Fastq("s", sequence, "", "I" * len(sequence))
+            yield Fastq("@G", sequence, "", "G" * len(sequence))
 
 # Parse user input
 try:
