@@ -6,7 +6,7 @@ WARNING: DO NOT USE IN PRODUCTION
     be fine for some applications but potentially catastrophic for others.
 
 Usage:
-    <program> input_fastq output_fastq
+    <program> input_fastq num_qual_levels output_fastq
 
 """
 
@@ -51,11 +51,25 @@ def myopen(_file, mode="rt"):
     else:
         return open(_file, mode=mode)
 
-def fastq_iterator(infile):
+def fastq_compressor(infile, num_qual_levels):
     """Takes a fastq file infile and returns a fastq object iterator
 
     Requires fastq file with four lines per sequence and no blank lines.
     """
+
+    def quality_level_encode(qual, num_levels, offset):
+        """Recode quality string into num_levels levels
+        """
+        if num_levels == 1:
+            return "I" * len(qual)
+
+        divisor = 40 / num_levels
+        new_qual = []
+        for q in qual:
+            new_qual.append(
+                    chr(int(divisor) * int((ord(q) - offset) / divisor) + offset)
+                    )
+        return("".join(new_qual))
     
     with myopen(infile) as f:
         while True:
@@ -66,19 +80,23 @@ def fastq_iterator(infile):
 
             sequence = f.readline().strip()
             name2 = f.readline().strip()
-            quality = f.readline().strip()
-            yield Fastq("@", sequence, "+", "I" * len(sequence))
+            quality = quality_level_encode(f.readline().strip(), num_qual_levels, offset=33)
+            yield Fastq("@", sequence, "+", quality)
 
 # Parse user input
 try:
     input_fastq = sys.argv[1]
-    output_fastq = sys.argv[2]
+    num_qual_levels = int(sys.argv[2])
+    output_fastq = sys.argv[3]
 except:
     print(__doc__)
     sys.exit()
 
+# Assert values
+assert 1 <= num_qual_levels <= 40, "num_qual_levels must be an integer between 1 and 40 inclusively"
+
 # Treat sequences
-sequences = fastq_iterator(input_fastq)
+sequences = fastq_compressor(input_fastq, num_qual_levels)
 
 with myopen(output_fastq, "wt") as outfile:
     for s in sequences:

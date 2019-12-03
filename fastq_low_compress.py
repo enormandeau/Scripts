@@ -56,6 +56,17 @@ def fastq_iterator(infile):
 
     Requires fastq file with four lines per sequence and no blank lines.
     """
+
+    def quality_level_encode(qual, num_levels, offset):
+        """Recode quality string into num_levels levels
+        """
+        divisor = int(40 / num_levels)
+        new_qual = []
+        for q in qual:
+            new_qual.append(
+                    chr(divisor * int((ord(q) - offset) / divisor) + offset)
+                    )
+        return("".join(new_qual))
     
     with myopen(infile) as f:
         while True:
@@ -66,8 +77,8 @@ def fastq_iterator(infile):
 
             sequence = f.readline().strip()
             name2 = f.readline().strip()
-            quality = f.readline().strip()
-            yield Fastq("@", sequence, "+", "I" * len(sequence))
+            quality = quality_level_encode(f.readline().strip(), num_levels=8, offset=33)
+            yield Fastq("@", sequence, "+", quality)
 
 # Parse user input
 try:
