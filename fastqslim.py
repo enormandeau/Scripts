@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Improve compressability by modifying names and re-encode quality strings
+"""Improve compressability of fastq files by modifying name and quality strings
 
-WARNING: DO NOT USE IN PRODUCTION
-    Sequence names and qualities are modified in the process. This may be fine
-    for some applications but potentially catastrophic for others.
+WARNING:
+    /!\  USE AT YOUR OWN RISK  /!\ 
+
+    Sequence name and qualitie strings are modified in the process. This may be
+    fine for some applications but potentially catastrophic for others.
 
 Usage:
-    <program> input_fastq scheme output_fastq
+    <program> input_fastq scheme name_option output_fastq
 
 """
 
@@ -48,15 +50,19 @@ def quality_slim(qual):
     return(new_qual)
 
 def name_slim(name):
-    return "@" + "s"
-    #return "@" + ":".join(name.split("_")[2:])
+    global name_option
+
+    if name_option == "no_name":
+        return "@" + "s"
+    elif name_option == "short_name":
+        return "@" + ":".join(name.split(":")[1:])
 
 def fastq_compressor(infile):
     """Takes a fastq file infile and returns a fastq object iterator
 
     Requires fastq file with four lines per sequence and no blank lines.
     """
-    
+
     with myopen(infile) as f:
         while True:
             name = f.readline().strip()
@@ -68,6 +74,16 @@ def fastq_compressor(infile):
             quality = f.readline().strip()
 
             yield Fastq(name_slim(name), sequence, "+", quality_slim(quality))
+
+# Parse user input
+try:
+    input_fastq = sys.argv[1]
+    scheme = sys.argv[2]
+    name_option = sys.argv[3]
+    output_fastq = sys.argv[4]
+except:
+    print(__doc__)
+    sys.exit()
 
 # Create quality reduction dictionaries for Illumina v1.8
 # TODO think about where to put the new quality values:
@@ -83,17 +99,17 @@ reduced = {
         "1": """GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"""
         } #     012345678901234567890123456789012345678901
           #     |    ^    |    ^    |    ^    |    ^    |
-
-# Parse user input
-try:
-    input_fastq = sys.argv[1]
-    scheme = sys.argv[2]
-    output_fastq = sys.argv[3]
-except:
+          #
+# Assert input
+if not scheme in reduced:
     print(__doc__)
-    print("Available schemes:")
-    print(" ".join(list(reduced.keys())))
-    sys.exit()
+    print("Available schemes: " + " ".join(list(reduced.keys())))
+    sys.exit(1)
+
+if not name_option in ["no_name", "short_name"]:
+    print(__doc__)
+    print("Available name options: \"no_name\", \"short_name\"")
+    sys.exit(1)
 
 quality_reduc = dict(zip(qualities, reduced[scheme]))
 
