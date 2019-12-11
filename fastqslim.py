@@ -6,7 +6,7 @@ WARNING: DO NOT USE IN PRODUCTION
     for some applications but potentially catastrophic for others.
 
 Usage:
-    <program> input_fastq output_fastq
+    <program> input_fastq scheme output_fastq
 
 """
 
