@@ -91,6 +91,7 @@ except:
 # - All values are at or above?
 # - All values are at or below?
 qualities =  """!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJ"""
+novasequal = """  #         -          8             F    """
 reduced = {
         "8": """$$$$''''++++000033333999999AAAAAAAGGGGGGGG""",
         "6": """&&&&&******0000006666666AAAAAAAAAGGGGGGGGG""",
