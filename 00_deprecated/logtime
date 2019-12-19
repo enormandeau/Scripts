@@ -1,9 +1,0 @@
-#!/bin/bash
-# Log time spent on a project in two columns, eg:
-# Date   NumHours
-# The log is cumulative and new entries are added at the end of the file.
-
-NUMHOURS=$1
-
-echo -e $(date +%Y-%M-%d_%H-%M-%S)"\t"$1 >> project_timelog.tsv
-
