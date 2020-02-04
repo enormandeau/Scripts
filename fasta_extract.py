@@ -22,7 +22,7 @@ class Fasta(object):
         handle.write(self.sequence + "\n")
 
 # Functions
-def myopen(infile, mode="r"):
+def myopen(infile, mode="rt"):
     if infile.endswith(".gz"):
         return gzip.open(infile, mode=mode)
     else:
@@ -69,7 +69,7 @@ if not wanted:
 
 fasta_sequences = fasta_iterator(fasta_file)
 
-with open(result_file, "w") as f:
+with open(result_file, "wt") as f:
     for seq in fasta_sequences:
         name = seq.name.split(" ")[0]
         if name in wanted and len(seq.sequence) > 0:
