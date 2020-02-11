@@ -22,7 +22,7 @@ class Fasta(object):
         handle.write(self.sequence + "\n")
 
 # Defining functions
-def myopen(_file, mode="r"):
+def myopen(_file, mode="rt"):
     if _file.endswith(".gz"):
         return gzip.open(_file, mode=mode)
     else:
@@ -55,7 +55,7 @@ try:
     number_wanted = int(sys.argv[2]) # Number of sequences wanted
     result_file = sys.argv[3] # Output fasta file
 except:
-    print __doc__
+    print(__doc__)
     sys.exit(0)
 
 # Main
@@ -72,7 +72,7 @@ if __name__ == '__main__':
             if rand < number_wanted:
                 retained[random.randrange(number_wanted)] = fasta
     
-    with myopen(result_file, "w") as outf:
+    with myopen(result_file, "wt") as outf:
         for s in retained:
             outf.write(">" + s.name + "\n")
             outf.write(s.sequence + "\n")
