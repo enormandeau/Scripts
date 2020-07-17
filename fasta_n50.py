@@ -30,10 +30,10 @@ def myopen(_file, mode="rt"):
     else:
         return open(_file, mode=mode)
 
-def fasta_iterator(input_file):
-    """Takes a fasta file input_file and returns a fasta iterator
+def fasta_iterator(genome_file):
+    """Takes a fasta file genome_file and returns a fasta iterator
     """
-    with myopen(input_file) as f:
+    with myopen(genome_file) as f:
         sequence = ""
         name = ""
         begun = False
@@ -57,7 +57,7 @@ if __name__ == '__main__':
 
     # Parse user input
     try:
-        input_file = sys.argv[1]
+        genome_file = sys.argv[1]
     except:
         print(__doc__)
         sys.exit(1)
@@ -67,12 +67,12 @@ if __name__ == '__main__':
     except:
         min_length = 1
 
-    print("Including contigs/scaffolds with at least " + str(min_length) + " bp")
-
     # Cound kmers
     sequence_lengths = []
+    num_seq = 0
 
-    for seq in fasta_iterator(input_file):
+    for seq in fasta_iterator(genome_file):
+        num_seq += 1
         length = len(seq.sequence)
         if length >= min_length:
             sequence_lengths.append(len(seq.sequence))
@@ -81,12 +81,18 @@ if __name__ == '__main__':
     total_length = sum(sequence_lengths)
     half_length = float(total_length) / 2.0
 
-    print("Genome size: " + str(total_length))
+    print(genome_file)
+    print("  " + str(total_length) + " bp in " + str(num_seq) +
+            " sequences of " + str(min_length) + "+ bp")
 
     cumulative_length = 0
+    cumulative_seq = 0
+
     for seq_len in sequence_lengths:
         cumulative_length += seq_len
-        if cumulative_length >= half_length:
-            print("N50: " + str(seq_len))
-            break
+        cumulative_seq += 1
 
+        if cumulative_length >= half_length:
+            print("  L50: " + str(cumulative_seq) + "; N50: " + str(seq_len))
+            print()
+            break
