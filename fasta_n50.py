@@ -72,9 +72,9 @@ if __name__ == '__main__':
     num_seq = 0
 
     for seq in fasta_iterator(genome_file):
-        num_seq += 1
         length = len(seq.sequence)
         if length >= min_length:
+            num_seq += 1
             sequence_lengths.append(len(seq.sequence))
 
     sequence_lengths = sorted(sequence_lengths, reverse=True)
