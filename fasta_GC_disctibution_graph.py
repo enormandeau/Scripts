@@ -132,10 +132,10 @@ for s in sequences:
         remaining = remaining[window_size:]
         gc_values.append(float(counter["C"] + counter["G"]) / float(window_size))
 
-## Write values to file
-#with open(output_file, "w") as outfile:
-#    for gc in sorted(gc_values):
-#        outfile.write(str(gc) + "\n")
+# Write values to file
+with open(output_file, "w") as outfile:
+    for gc in sorted(gc_values):
+        outfile.write(str(gc) + "\n")
 
 # Produce GC histogram
 plot = sns.distplot(gc_values,
