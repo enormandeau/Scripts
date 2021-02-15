@@ -133,7 +133,10 @@ for s in sequences:
         pos += window_size
         counter = Counter(remaining[:window_size])
         remaining = remaining[window_size:]
-        gc_values.append((name, pos, float(counter["C"] + counter["G"]) / float(window_size - counter["N"])))
+        try:
+            gc_values.append((name, pos, float(counter["C"] + counter["G"]) / float(window_size - counter["N"])))
+        except:
+            pass
 
 # Write values to file
 with open(output_file, "w") as outfile:
