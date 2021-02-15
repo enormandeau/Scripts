@@ -126,19 +126,23 @@ gc_values = []
 
 for s in sequences:
     remaining = s.sequence.upper()
+    name = s.name
+    pos = -1 * int(window_size / 2)
 
     while len(remaining) >= window_size:
+        pos += window_size
         counter = Counter(remaining[:window_size])
         remaining = remaining[window_size:]
-        gc_values.append(float(counter["C"] + counter["G"]) / float(window_size))
+        gc_values.append((name, pos, float(counter["C"] + counter["G"]) / float(window_size)))
 
 # Write values to file
 with open(output_file, "w") as outfile:
     for gc in sorted(gc_values):
-        outfile.write(str(gc) + "\n")
+        outfile.write("\t".join([str(x) for x in gc]) + "\n")
 
 # Produce GC histogram
-plot = sns.distplot(gc_values,
+gc = [x[2] for x in gc_values]
+plot = sns.distplot(gc,
         bins=25,
         kde=False,
         hist_kws={'edgecolor':'darkblue'},
@@ -147,7 +151,7 @@ plot = sns.distplot(gc_values,
 plt.xlabel("GC content")
 plt.ylabel("Frequency")
 plt.title("Distribution of GC content")
-average_gc = str(round(sum(gc_values) / float(len(gc_values)), 3))
+average_gc = str(round(sum(gc) / float(len(gc)), 3))
 plt.text(0.8, 5.7, "GC = " + average_gc, fontsize=10)
 plt.xlim(0, 1)
 plt.ylim(0, 6)
