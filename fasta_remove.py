@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """Extract sequences from a fasta file if their name is not in a 'remove' file.
@@ -57,7 +57,7 @@ try:
     remove_file = sys.argv[2] # Input remove file, one gene name per line
     result_file = sys.argv[3] # Output fasta file
 except:
-    print __doc__
+    print(__doc__)
     sys.exit(0)
 
 remove = set()
@@ -74,5 +74,5 @@ fasta_sequences = fasta_iterator(fasta_file)
 with myopen(result_file, "w") as outf:
     for seq in fasta_sequences:
         name = seq.name
-        if name not in remove and len(str(seq.sequence)) > 0:
+        if name.split(" ")[0] not in remove and len(str(seq.sequence)) > 0:
             seq.write_to_file(outf)
