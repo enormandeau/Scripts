@@ -57,7 +57,7 @@ def fasta_iterator(input_file):
     """Takes a fasta file input_file and returns a fasta iterator
     """
     with myopen(input_file) as f:
-        sequence = ""
+        sequence = []
         name = ""
         begun = False
 
@@ -66,7 +66,7 @@ def fasta_iterator(input_file):
 
             if line.startswith(">"):
                 if begun:
-                    yield Fasta(name, sequence)
+                    yield Fasta(name, "".join(sequence))
 
                 name = line[1:]
                 sequence = ""
@@ -76,7 +76,7 @@ def fasta_iterator(input_file):
                 sequence += line
 
         if name != "":
-            yield Fasta(name, sequence)
+            yield Fasta(name, "".join(sequence))
 
 def fastq_iterator(infile):
     """Takes a fastq file infile and returns a fastq object iterator

@@ -16,40 +16,50 @@ import sys
 class Fasta(object):
     """Fasta object with name and sequence
     """
+
     def __init__(self, name, sequence):
         self.name = name
         self.sequence = sequence
+
     def write_to_file(self, handle):
         handle.write(">" + self.name + "\n")
         handle.write(self.sequence + "\n")
 
+    def __repr__(self):
+        return self.name + " " + self.sequence[:31]
+
 # Defining functions
-def myopen(infile, mode="r"):
-    if infile.endswith(".gz"):
-        return gzip.open(infile, mode=mode)
+def myopen(_file, mode="rt"):
+    if _file.endswith(".gz"):
+        return gzip.open(_file, mode=mode)
+
     else:
-        return open(infile, mode=mode)
+        return open(_file, mode=mode)
 
 def fasta_iterator(input_file):
     """Takes a fasta file input_file and returns a fasta iterator
     """
     with myopen(input_file) as f:
-        sequence = ""
+        sequence = []
         name = ""
         begun = False
+
         for line in f:
             line = line.strip()
+
             if line.startswith(">"):
                 if begun:
-                    yield Fasta(name, sequence)
-                name = line.replace(">", "")
+                    yield Fasta(name, "".join(sequence))
+
+                name = line[1:]
                 sequence = ""
                 begun = True
+
             else:
                 sequence += line
 
         if name != "":
-            yield Fasta(name, sequence)
+            yield Fasta(name, "".join(sequence))
 
 # Parsing user input
 try:
@@ -71,7 +81,7 @@ with open(remove_file) as f:
 # Iterate through sequences and write to files
 fasta_sequences = fasta_iterator(fasta_file)
 
-with myopen(result_file, "w") as outf:
+with myopen(result_file, "wt") as outf:
     for seq in fasta_sequences:
         name = seq.name
         if name.split(" ")[0] not in remove and len(str(seq.sequence)) > 0:
