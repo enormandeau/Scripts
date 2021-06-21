@@ -9,6 +9,8 @@ Usage:
 
 The correspondence file has two tab-separated columns with the prsent name on
 the left and the wanted name on the right.
+
+Scaffolds below min_length will be removed
 """
 
 # Modules
