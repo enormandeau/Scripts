@@ -7,11 +7,11 @@
 # Global variables
 input_folder="$1"
 output_file=numreads_per_sample_"${input_folder%/}"
-rm $output_file 
-module load samtools
+rm $output_file 2>/dev/null
+module load samtools 2>/dev/null
 
 # Fastq files
-for fastq in $(ls -1 "$input_folder"/*.fastq.gz "$input_folder"/*.fq.gz)
+for fastq in $(ls -1 "$input_folder"/*.fastq.gz "$input_folder"/*.fq.gz 2>/dev/null)
 do
     base=$(basename "$fastq")
     temp=."$base".deleteme
@@ -29,7 +29,7 @@ done | tee "$output_file"_fastq
 [ -s "$output_file"_fastq ] ||  rm "$output_file"_fastq
 
 # Bam files
-for bamfile in $(ls -1 "$input_folder"/*.bam)
+for bamfile in $(ls -1 "$input_folder"/*.bam 2>/dev/null)
 do
     base=$(basename "$bamfile")
     numreads=$(samtools idxstats "$bamfile" | awk '{s+=$3}END{print s}')
