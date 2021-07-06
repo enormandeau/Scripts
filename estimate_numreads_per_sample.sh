@@ -20,7 +20,7 @@ do
     gunzip -c "$fastq" | head -200000 | tail -40000 | gzip -c - > "$temp"
     size_subset=$(ls -l "$temp" | awk '{print $5}')
     size_full=$(ls -l "$fastq" | awk '{print $5}')
-    numreads=$(echo 10000 $size_subset $size_full | awk '{print 2 * $1 * $3 / $2}')
+    numreads=$(echo 10000 $size_subset $size_full | awk '{print $1 * $3 / $2}')
     echo -e "$base\t$numreads"
     rm "$temp"
 done | tee "$output_file"_fastq
