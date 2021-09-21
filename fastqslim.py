@@ -5,7 +5,7 @@ WARNING:
     /!\  USE AT YOUR OWN RISK  /!\ 
 
     Sequence name and qualitie strings are modified in the process. This may be
-    fine for some applications but potentially catastrophic for others.
+    fine for some applications but POTENTIALLY CATASTROPHIC for others.
 
 Usage:
     <program> input_fastq scheme name_option output_fastq
