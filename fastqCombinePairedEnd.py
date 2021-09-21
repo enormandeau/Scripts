@@ -54,9 +54,7 @@ class Fastq(object):
 
     def getShortname(self, separator):
         if separator:
-            self.temp = self.name.split(separator)
-            del(self.temp[-1])
-            return separator.join(self.temp)
+            return separator.join(self.name.split(separator)[:-1])
         else:
             return self.name
 
@@ -110,6 +108,7 @@ if __name__ == "__main__":
                         s1 = next(seq1)
                     except:
                         s1_finished = True
+
                     try:
                         s2 = next(seq2)
                     except:
@@ -118,6 +117,7 @@ if __name__ == "__main__":
                     # Add new sequences to hashes
                     if not s1_finished:
                         seq1_dict[s1.getShortname(separator)] = s1
+
                     if not s2_finished:
                         seq2_dict[s2.getShortname(separator)] = s2
 
