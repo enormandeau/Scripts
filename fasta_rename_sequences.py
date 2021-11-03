@@ -72,7 +72,7 @@ except:
 seq_num = 1
 sequences = fasta_iterator(input_fasta)
 
-with open(output_fasta, "wt") as outfile:
+with myopen(output_fasta, "wt") as outfile:
     for s in sequences:
         number = "0" * (padding - len(str(seq_num))) + str(seq_num)
         s.name = stub + number

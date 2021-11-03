@@ -22,6 +22,7 @@ class Fastq(object):
         self.seq = seq
         self.name2 = name2
         self.qual = qual
+
     def write_to_file(self, handle):
         handle.write("@" + self.name + "\n")
         handle.write(self.seq + "\n")
@@ -32,7 +33,7 @@ class Fastq(object):
 def fastq_parser(input_file):
     """Takes a fastq file infile and returns a fastq object iterator
     """
-    with gzip.open(input_file, "rb") as f:
+    with gzip.open(input_file, "rt") as f:
         while True:
             name = f.readline().strip()[1:]
             if not name:
@@ -49,14 +50,14 @@ if __name__ == '__main__':
         length_threshold = int(sys.argv[2])
         output_file = sys.argv[3]
     except:
-        print __doc__
+        print(__doc__)
         exit(1)
 
     assert length_threshold >= 1, "length threshold must be a positive integer"
 
     # Filter sequences
     sequences = fastq_parser(input_file)
-    with gzip.open(output_file, "wb") as out_f:
+    with gzip.open(output_file, "wt") as out_f:
         for s in sequences:
             if len(s.seq) >= length_threshold:
                 s.write_to_file(out_f)

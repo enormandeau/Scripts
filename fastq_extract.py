@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python3
 
 """Extract sequences from a fastq file if their name is in a 'wanted' file.
 
@@ -8,6 +7,7 @@ Wanted file contains one sequence name per line.
 Usage:
     %program <input_file> <wanted_file> <output_file>"""
 
+# Modules
 import gzip
 import sys
 
@@ -32,7 +32,7 @@ class Fastq(object):
         handle.write(self.seq + "\n")
 
 # Defining functions
-def myopen(infile, mode="r"):
+def myopen(infile, mode="rt"):
     if infile.endswith(".gz"):
         return gzip.open(infile, mode=mode)
     else:
@@ -58,7 +58,7 @@ try:
     wanted_file = sys.argv[2] # Input wanted file, one gene name per line
     result_file = sys.argv[3] # Output fasta file
 except:
-    print __doc__
+    print(__doc__)
     sys.exit(0)
 
 wanted = set()
@@ -73,11 +73,9 @@ if not wanted:
 
 fastq_sequences = fastq_parser(fasta_file)
 
-with open(result_file, "w") as f:
+with open(result_file, "wt") as f:
     for seq in fastq_sequences:
         name = seq.name.split(" ")[0]
-        if name in wanted and len(seq.sequence) > 0:
+        if name in wanted and len(seq.seq) > 0:
             wanted.remove(name) # Output only the first appearance for a name
             seq.write_fastq(f)
-
-
