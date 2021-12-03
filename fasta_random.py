@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python3
 
 """Create random fasta sequences.
 
@@ -15,7 +14,7 @@ try:
     num_seq = int(sys.argv[2])  # Number of sequences
     result_file = sys.argv[3]   # Output fasta file
 except:
-    print __doc__
+    print(__doc__)
     sys.exit(0)
 
 stub = "seq_"
