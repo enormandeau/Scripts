@@ -6,6 +6,7 @@ Usage:
 
 Where:
     wanted_files contains two tab separated columns with scaffold name and position
+    (there may be other columns after, as in a bedfile)
 """
 
 # Modules
@@ -84,7 +85,9 @@ wanted_regions = defaultdict(list)
 
 with open(wanted_file) as wfile:
     for line in wfile:
-        scaffold, position = line.strip().split("\t")
+        l = line.strip().split("\t")
+        scaffold = l[0]
+        position = l[1]
         wanted_regions[scaffold].append(position)
 
 # Extract regions
