@@ -1,6 +1,9 @@
 """Module with Fasta and Fastq modules and file readers
 """
 
+# Modules
+import gzip
+
 # Classes
 class Fasta(object):
     """Fasta object with name and sequence
