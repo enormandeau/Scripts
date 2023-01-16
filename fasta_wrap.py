@@ -65,7 +65,7 @@ except:
 try:
     nb_char = int(sys.argv[3])
 except:
-    print("No line lenght or bad lenght specified, using 60 pb per line")
+    print("No line length or bad length specified, using 60 pb per line")
     nb_char = 60
 
 sequences = fasta_iterator(input_file)
