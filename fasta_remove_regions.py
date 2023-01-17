@@ -120,4 +120,4 @@ with myopen(output_fasta, "wt") as outfile:
         else:
             print("no")
 
-    s.write_to_file(outfile)
+        s.write_to_file(outfile)
