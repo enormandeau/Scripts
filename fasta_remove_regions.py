@@ -108,16 +108,6 @@ with myopen(output_fasta, "wt") as outfile:
                     n = n_size
 
                 # Remove region
-                print("region size:", r[1] - r[0])
-                size_before = len(s.sequence)
-                print("seq size before:", size_before)
                 s.sequence = s.sequence[:r[0]] + n * "N" + s.sequence[r[1]: ]
-                size_after = len(s.sequence)
-                print("seq size after:", size_after)
-                print("diff:", size_before - size_after)
-                print()
-        
-        else:
-            print("no")
 
         s.write_to_file(outfile)
