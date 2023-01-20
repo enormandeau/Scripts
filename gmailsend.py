@@ -12,7 +12,6 @@ import getpass
 import sys
 
 # Parse user input
-# TODO switch to argparse
 try:
     sender = sys.argv[1]
     recipient = sys.argv[2]

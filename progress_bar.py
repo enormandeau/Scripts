@@ -19,7 +19,7 @@ try:
     number_total = int(sys.argv[1])
     number_done = int(sys.argv[2])
 except:
-    print __doc__
+    print(__doc__)
     sys.exit(1)
 
 try:
@@ -44,7 +44,7 @@ progress = "(" + progress + ") "
 
 percent = str("%3.1f" % percent_done) + "%"
 
-print name + numbers + progress + percent
+print(name + numbers + progress + percent)
 
 """
 Processes:
