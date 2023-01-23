@@ -34,7 +34,12 @@ except:
 name = process_name + ": "
 name = name + (16 - len(name)) * " "
 
-numbers = str(number_completed) + "/" + str(number_total) + " "
+# Print integers without .0
+if number_completed//1 == number_completed and number_total//1 == number_total:
+    numbers = str(int(number_completed)) + "/" + str(int(number_total)) + " "
+else:
+    numbers = str(number_completed) + "/" + str(number_total) + " "
+
 numbers = numbers + (8 - len(numbers)) * " "
 
 progress = int(math.floor(percent_completed * 0.3)) * "="
