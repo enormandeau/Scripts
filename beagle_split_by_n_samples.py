@@ -42,7 +42,6 @@ with myopen(input_beagle) as infile:
             for i in range(num_files):
                 output_handles[i] = myopen(("split_" + str(i) + ".beagle"), "wt")
 
-
         for i in range(num_files):
             new_line = info[:]
             new_line += data[: split_num]
