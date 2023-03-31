@@ -79,7 +79,7 @@ with myopen(output_file, "wt") as outfile:
             print(s.name, str(pos), str(len(gzip.compress(window.upper().encode())) / len(window)), sep="\t")
             outfile.write(
                     "\t".join(
-                        [s.name, str(pos), str(len(gzip.compress(window.upper.encode())) / len(window))]
+                        [s.name, str(pos), str(len(gzip.compress(window.upper().encode())) / len(window))]
                         ) + "\n"
                     )
             outfile.flush()
