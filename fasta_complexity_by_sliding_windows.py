@@ -68,6 +68,7 @@ except:
     sys.exit(1)
 
 # Slide away!
+tot_pos = 0
 sequences = fasta_iterator(input_file)
 
 with myopen(output_file, "wt") as outfile:
@@ -76,18 +77,20 @@ with myopen(output_file, "wt") as outfile:
         while s.sequence:
             window, s.sequence = s.sequence[: window_size], s.sequence[window_size: ]
 
-            print(s.name, str(pos), str(len(gzip.compress(window.upper().encode())) / len(window)), sep="\t")
+            print(s.name, str(pos), str(tot_pos), str(len(gzip.compress(window.upper().encode())) / len(window)), sep="\t")
             outfile.write(
                     "\t".join(
-                        [s.name, str(pos), str(len(gzip.compress(window.upper().encode())) / len(window))]
+                        [s.name, str(pos), str(tot_pos), str(len(gzip.compress(window.upper().encode())) / len(window))]
                         ) + "\n"
                     )
             outfile.flush()
 
             pos += window_size
+            tot_pos += window_size
         
-        print(s.name, str(pos), 0.3, sep="\t")
-        print(s.name, str(pos), 0.0, sep="\t")
-        print(s.name, str(pos), 0.33, sep="\t")
-        print(s.name, str(pos), 0.0, sep="\t")
-        print(s.name, str(pos), 0.3, sep="\t")
+        # Delimiter between chromosomes
+        for i in range(3):
+            tot_pos += window_size
+            outfile.write(f"Twix\t{pos}\t{tot_pos}\t0\n")
+
+        print("#####")
