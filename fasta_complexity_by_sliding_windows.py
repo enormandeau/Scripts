@@ -67,17 +67,30 @@ except:
     print(__doc__)
     sys.exit(1)
 
-# Slide away!
+# Extract complexity by sliding window
 tot_pos = 0
 sequences = fasta_iterator(input_file)
 
 with myopen(output_file, "wt") as outfile:
+
+    # If scaffold doesn't have at least 2 full windows, skip
     for s in sequences:
+        if len(s.sequence) < (2 * window_size):
+            continue
+
         pos = 0
         while s.sequence:
+
+            # If remaining sequence is shorter than half window_size, skip
+            if len(s.sequence) < (window_size / 2):
+                pos += window_size
+                tot_pos += window_size
+                continue
+
+            # Get next window
             window, s.sequence = s.sequence[: window_size], s.sequence[window_size: ]
 
-            print(s.name, str(pos), str(tot_pos), str(len(gzip.compress(window.upper().encode())) / len(window)), sep="\t")
+            # Write stats to output
             outfile.write(
                     "\t".join(
                         [s.name, str(pos), str(tot_pos), str(len(gzip.compress(window.upper().encode())) / len(window))]
@@ -85,8 +98,12 @@ with myopen(output_file, "wt") as outfile:
                     )
             outfile.flush()
 
+            # Upgrade positions
             pos += window_size
             tot_pos += window_size
+
+            # Report result on stdin
+            print(s.name, str(pos), str(tot_pos), str(len(gzip.compress(window.upper().encode())) / len(window)), sep="\t")
         
         # Delimiter between chromosomes
         for i in range(3):
