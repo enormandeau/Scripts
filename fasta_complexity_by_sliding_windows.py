@@ -1,6 +1,16 @@
 #!/usr/bin/env python3
 """Get sequence complexity by sliding-window for whole genomes
 
+Sequence complexity is measured as the ratio of the length of a gzip-compressed
+sequence of window_size over its non-compressed length. Reported values range
+between 0 (infinite compression) to 1 (maximum sequence entropy). Lower values
+thus represent regions of low complexity.
+
+Results are written to the output_file and a different version is also printed
+on screen. Namely, the delimitations between chromosomes or scaffolds are
+reported with "#####" on the screen but with lines starting by "Twix" in the
+output_file.
+
 Usage:
     <program> input_genome window_size min_scaf_size output_file
 
