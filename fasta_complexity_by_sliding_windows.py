@@ -79,23 +79,16 @@ with myopen(output_file, "wt") as outfile:
             continue
 
         pos = 0
-        while s.sequence:
-
-            # If remaining sequence is shorter than half window_size, skip
-            if len(s.sequence) < (window_size / 2):
-                pos += window_size
-                tot_pos += window_size
-                continue
+        while len(s.sequence) > (1.5 * window_size):
 
             # Get next window
             window, s.sequence = s.sequence[: window_size], s.sequence[window_size: ]
 
             # Write stats to output
-            outfile.write(
-                    "\t".join(
-                        [s.name, str(pos), str(tot_pos), str(len(gzip.compress(window.upper().encode())) / len(window))]
-                        ) + "\n"
-                    )
+            compression_ratio = len(gzip.compress(window.upper().encode())) / len(window)
+            line = "\t".join([s.name, str(pos), str(tot_pos), str(round(compression_ratio, 6))])
+
+            outfile.write(line + "\n")
             outfile.flush()
 
             # Upgrade positions
@@ -103,11 +96,17 @@ with myopen(output_file, "wt") as outfile:
             tot_pos += window_size
 
             # Report result on stdin
-            print(s.name, str(pos), str(tot_pos), str(len(gzip.compress(window.upper().encode())) / len(window)), sep="\t")
+            print(line)
         
         # Delimiter between chromosomes
-        for i in range(3):
-            tot_pos += window_size
-            outfile.write(f"Twix\t{pos}\t{tot_pos}\t0\n")
+        # Twix, definition:
+        #(a) With ref. to position or location in space: among (several
+        #animals); in among (surrounding objects); ~ hondes, in (one's) hands;
+        #(b) with ref. to association or relationship: between two
+        #(parties); also, among (parties) [quot. a1400, last]; ben born
+        tot_pos -= window_size
+        outfile.write(f"Twix\t{pos}\t{tot_pos}\t0\n")
+        tot_pos += window_size * 5
+        outfile.write(f"Twix\t{pos}\t{tot_pos}\t0\n")
 
         print("#####")
