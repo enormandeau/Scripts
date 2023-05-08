@@ -30,26 +30,30 @@ def myopen(_file, mode="rt"):
     else:
         return open(_file, mode=mode)
 
-def fasta_iterator(genome_file):
-    """Takes a fasta file genome_file and returns a fasta iterator
+def fasta_iterator(input_file):
+    """Takes a fasta file input_file and returns a fasta iterator
     """
-    with myopen(genome_file) as f:
-        sequence = ""
+    with myopen(input_file) as f:
+        sequence = []
         name = ""
         begun = False
+
         for line in f:
             line = line.strip()
+
             if line.startswith(">"):
                 if begun:
-                    yield Fasta(name, sequence)
-                name = line.replace(">", "")
+                    yield Fasta(name, "".join(sequence))
+
+                name = line[1:]
                 sequence = ""
                 begun = True
+
             else:
                 sequence += line
 
         if name != "":
-            yield Fasta(name, sequence)
+            yield Fasta(name, "".join(sequence))
 
 if __name__ == '__main__':
     # Prevent broken pipe error

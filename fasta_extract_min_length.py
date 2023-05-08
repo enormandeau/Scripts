@@ -49,11 +49,11 @@ def fasta_iterator(input_file):
                     yield Fasta(name, "".join(sequence))
 
                 name = line[1:]
-                sequence = ""
+                sequence = []
                 begun = True
 
             else:
-                sequence += line
+                sequence.append(line)
 
         if name != "":
             yield Fasta(name, "".join(sequence))
@@ -69,8 +69,7 @@ except:
 
 fasta_sequences = fasta_iterator(input_file)
 
-with open(output_file, "wt") as outfile:
+with myopen(output_file, "wt") as outfile:
     for seq in fasta_sequences:
         if len(seq.sequence) >= min_length:
             seq.write_to_file(outfile)
-
