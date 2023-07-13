@@ -48,7 +48,7 @@ class Fastq(object):
     def __repr__(self):
         return self.name + " " + self.sequence[:31]
 
-# Defining functions
+# Functions
 def myopen(_file, mode="rt"):
     if _file.endswith(".gz"):
         return gzip.open(_file, mode=mode)
