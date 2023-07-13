@@ -79,7 +79,9 @@ def split_and_write_sequences(seq, min_Ns, min_len, output_file):
         print(short_name, _from, _to)
 
         if (_to - _from) > min_len:
-            Fasta("_".join([short_name, nstr, _from, _to]), seq.sequence[_from: _to]).write_to_file(outfile)
+            Fasta("_".join(
+                [short_name, nstr, str(_from), str(_to)]), seq.sequence[_from: _to]
+                ).write_to_file(outfile)
 
 # Main
 if __name__ == '__main__':
