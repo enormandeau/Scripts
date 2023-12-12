@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """Split a fasta file into chuncks of at least n nucleotides
 
 Usage:
@@ -51,7 +51,7 @@ if __name__ == '__main__':
         input_file = sys.argv[1]
         n = int(sys.argv[2])
     except:
-        print __doc__
+        print(__doc__)
         sys.exit(1)
 
     try:

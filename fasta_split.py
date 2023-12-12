@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 """Split a fasta file in n files of approximately the same number of sequences
 
 WARNING: This will create 'n' files in your present directory

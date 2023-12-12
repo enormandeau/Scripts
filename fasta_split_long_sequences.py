@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """Split long sequences in fasta file
 
 Usage:
@@ -79,7 +79,7 @@ try:
     max_len = int(sys.argv[2])
     output_file = sys.argv[3]
 except:
-    print __doc__
+    print(__doc__)
     sys.exit(1)
 
 fasta_sequences = fasta_iterator(input_file)
@@ -91,9 +91,9 @@ with open(output_file, "w") as outfile:
             while len(seq.sequence) > 0:
                 left = copy.deepcopy(seq)
                 left.sequence = seq.sequence[0:max_len]
-                print len(seq.sequence)
+                print(len(seq.sequence))
                 seq.sequence = seq.sequence[max_len:]
-                print len(seq.sequence)
+                print(len(seq.sequence))
                 counter += 1
                 chunk_name = "chunk_" + str(counter)
                 left.name += chunk_name
