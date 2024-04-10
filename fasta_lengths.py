@@ -69,4 +69,4 @@ except:
 sequences = fasta_iterator(input_fasta)
 
 for s in sequences:
-    print(len(s.sequence))
+    print(s.name, len(s.sequence))
