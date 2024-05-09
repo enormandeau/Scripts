@@ -15,7 +15,7 @@ class Fasta(object):
     """
 
     def __init__(self, name, sequence):
-        self.name = name
+        self.name = name.split(" ")[0]
         self.sequence = sequence
 
     def write_to_file(self, handle):
@@ -75,12 +75,12 @@ sequences = fasta_iterator(input_fasta)
 with myopen(output_fasta, "wt") as outfile:
     for s in sequences:
         chunk = 0
+
         while s.sequence:
-            pos = chunk * overlap
             chunk += 1
 
-            name = s.name + "_chunk" + str(chunk) + "_pos" + str(pos)
+            name = s.name + "_chunk" + str(chunk)
             seq = s.sequence[: max_len]
-            s.sequence = s.sequence[overlap: ]
+            s.sequence = s.sequence[max_len - overlap: ]
 
             outfile.write(">" + name + "\n" + seq + "\n")
