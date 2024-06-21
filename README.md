@@ -2,9 +2,9 @@
 
 This is a collection of scripts written over the years to solve specific
 problems. Some of them are well tested, others not so well. As they have been
-written over a long period of time, the style and quality vary.
+written over a period of 13+ years, the style and quality vary considerably.
 
-### Use at your own risk
+### USE AT YOUR OWN RISK
 
 These programs are provided as is, without any implied garanty of usefulness.
 
