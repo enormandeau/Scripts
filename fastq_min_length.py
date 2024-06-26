@@ -30,10 +30,17 @@ class Fastq(object):
         handle.write(self.qual + "\n")
 
 # Defining functions
+def myopen(_file, mode="rt"):
+    if _file.endswith(".gz"):
+        return gzip.open(_file, mode=mode)
+
+    else:
+        return open(_file, mode=mode)
+
 def fastq_parser(input_file):
     """Takes a fastq file infile and returns a fastq object iterator
     """
-    with gzip.open(input_file, "rt") as f:
+    with myopen(input_file, "rt") as f:
         while True:
             name = f.readline().strip()[1:]
             if not name:
@@ -57,7 +64,7 @@ if __name__ == '__main__':
 
     # Filter sequences
     sequences = fastq_parser(input_file)
-    with gzip.open(output_file, "wt") as out_f:
+    with myopen(output_file, "wt") as out_f:
         for s in sequences:
             if len(s.seq) >= length_threshold:
                 s.write_to_file(out_f)
