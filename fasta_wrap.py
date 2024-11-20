@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 """Wrap fasta sequences to a given length (60 characters by default).
 
 Usage:
