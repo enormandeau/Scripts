@@ -66,8 +66,10 @@ with myopen(input_vcf, "rt") as infile:
         
         elif l[0] == "#CHROM":
             num_samples = len(l[9:])
+            num_populations = len(set([x.split("_")[0] for x in l[9:]]))
+            print(f"Samples: {num_samples}")
+            print(f"Populations: {num_populations}")
 
-print(f"Samples: {num_samples}")
 print(f"SNPs: {num_snps}")
 print(f"Missing: {round(100 * num_miss / num_geno, 2)}%")
 print(f"Coverage mean: {round(statistics.mean(coverages), 2)}")
