@@ -40,9 +40,9 @@ class Fastq(object):
             return self.name
 
     def write_to_file(self, handle):
-        handle.write(self.name + "\n")
+        handle.write("@" + self.name + "\n")
         handle.write(self.sequence + "\n")
-        handle.write(self.name2 + "\n")
+        handle.write("+" + self.name2 + "\n")
         handle.write(self.quality + "\n")
 
     def __repr__(self):
@@ -89,12 +89,12 @@ def fastq_iterator(infile):
     
     with myopen(infile) as f:
         while True:
-            name = f.readline().strip()
+            name = f.readline().strip()[1:]
 
             if not name:
                 break
 
             seq = f.readline().strip()
-            name2 = f.readline().strip()
+            name2 = f.readline().strip()[1:]
             qual = f.readline().strip()
             yield Fastq(name, seq, name2, qual)

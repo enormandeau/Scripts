@@ -13,23 +13,32 @@ import sys
 
 # Defining classes
 class Fastq(object):
-    """Fastq object with name and sequence
+    """Fastq object with name, sequence, name2, and quality string
     """
 
-    def __init__(self, name, seq, name2, qual):
-        self.name = name[1:]
-        self.seq = seq
+    def __init__(self, name, sequence, name2, quality):
+        self.name = name
+        self.sequence = sequence
         self.name2 = name2
-        self.qual = qual
+        self.quality = quality
 
     def getShortname(self, separator):
-        self.temp = self.name.split(separator)
-        del(self.temp[-1])
-        return separator.join(self.temp)
+        if separator:
+            self.temp = self.name.split(separator)
+            del(self.temp[-1])
+            return separator.join(self.temp)
 
-    def write_fastq(self, handle):
-        handle.write(">" + self.name + "\n")
-        handle.write(self.seq + "\n")
+        else:
+            return self.name
+
+    def write_to_file(self, handle):
+        handle.write("@" + self.name + "\n")
+        handle.write(self.sequence + "\n")
+        handle.write("+" + self.name2 + "\n")
+        handle.write(self.quality + "\n")
+
+    def __repr__(self):
+        return self.name + " " + self.sequence[:31]
 
 # Defining functions
 def myopen(infile, mode="rt"):
@@ -38,21 +47,25 @@ def myopen(infile, mode="rt"):
     else:
         return open(infile, mode=mode)
 
-def fastq_parser(infile):
+def fastq_iterator(infile):
     """Takes a fastq file infile and returns a fastq object iterator
+
+    Requires fastq file with four lines per sequence and no blank lines.
     """
     
     with myopen(infile) as f:
         while True:
-            name = f.readline().strip()
+            name = f.readline().strip()[1:]
+
             if not name:
                 break
 
             seq = f.readline().strip()
-            name2 = f.readline().strip()
+            name2 = f.readline().strip()[1:]
             qual = f.readline().strip()
             yield Fastq(name, seq, name2, qual)
 
+# Parse user input
 try:
     fasta_file = sys.argv[1]  # Input fasta file
     wanted_file = sys.argv[2] # Input wanted file, one gene name per line
@@ -64,18 +77,19 @@ except:
 wanted = set()
 with open(wanted_file) as f:
     for line in f:
-        line = line.strip()
+        line = line.strip().split("\t")[0]
         if line != "":
             wanted.add(line)
 
 if not wanted:
     sys.exit()
 
-fastq_sequences = fastq_parser(fasta_file)
+fastq_sequences = fastq_iterator(fasta_file)
 
 with open(result_file, "wt") as f:
     for seq in fastq_sequences:
         name = seq.name.split(" ")[0]
-        if name in wanted and len(seq.seq) > 0:
+
+        if name in wanted and len(seq.sequence) > 0:
             wanted.remove(name) # Output only the first appearance for a name
-            seq.write_fastq(f)
+            seq.write_to_file(f)
