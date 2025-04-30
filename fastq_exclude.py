@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
-"""Extract sequences from a fastq file if their name is in a 'wanted' file.
+"""Extract sequences from a fastq file if their name is in a 'unwanted' file.
 
-Wanted file contains one sequence name per line.
+Unwanted file contains one sequence name per line.
 
 Usage:
-    %program <input_file> <wanted_file> <output_file>"""
+    %program <input_file> <unwanted_file> <output_file>"""
 
 # Modules
 import gzip
@@ -68,20 +68,20 @@ def fastq_iterator(infile):
 # Parse user input
 try:
     fasta_file = sys.argv[1]  # Input fasta file
-    wanted_file = sys.argv[2] # Input wanted file, one gene name per line
+    unwanted_file = sys.argv[2] # Input unwanted file, one gene name per line
     result_file = sys.argv[3] # Output fasta file
 except:
     print(__doc__)
     sys.exit(0)
 
-wanted = set()
-with open(wanted_file) as f:
+unwanted = set()
+with open(unwanted_file) as f:
     for line in f:
         line = line.strip().split("\t")[0]
         if line != "":
-            wanted.add(line)
+            unwanted.add(line)
 
-if not wanted:
+if not unwanted:
     sys.exit()
 
 fastq_sequences = fastq_iterator(fasta_file)
@@ -90,5 +90,5 @@ with open(result_file, "wt") as f:
     for seq in fastq_sequences:
         name = seq.name.split(" ")[0]
 
-        if name in wanted and len(seq.sequence) > 0:
+        if name not in unwanted and len(seq.sequence) > 0:
             seq.write_to_file(f)
