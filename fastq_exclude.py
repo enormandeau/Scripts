@@ -86,7 +86,7 @@ if not unwanted:
 
 fastq_sequences = fastq_iterator(fasta_file)
 
-with open(result_file, "wt") as f:
+with myopen(result_file, "wt") as f:
     for seq in fastq_sequences:
         name = seq.name.split(" ")[0]
 
