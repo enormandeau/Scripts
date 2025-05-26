@@ -94,4 +94,4 @@ sequences = {x.name: x.sequence for x in fasta_iterator(input_genome)}
 with open(output_tsv, "wt") as outfile:
     for chrom in wanted_positions:
         for pos in wanted_positions[chrom]:
-            outfile.write("\t".join([chrom, pos, sequences[chrom][int(pos)+1]]) + "\n")
+            outfile.write("\t".join([chrom, pos, sequences[chrom][int(pos)-1]]) + "\n")
