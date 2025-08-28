@@ -6,8 +6,8 @@
 mkdir 01_run_info
 
 # Move all info files there
-mv *.csv *.html *.json 01_run_info
 mv $(find . | grep \.json$) 01_run_info
+mv *.csv *.html 01_run_info
 
 # Move all sequence files main directory
 mv $(find . | grep \.fastq.gz$) .
