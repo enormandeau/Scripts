@@ -12,6 +12,9 @@ mv *.csv *.html 01_run_info
 # Move all sequence files main directory
 mv $(find . | grep \.fastq.gz$) .
 
+# Move all md5 files main directory
+mv $(find . | grep \.md5$) .
+
 # Delete empty directories
 for i in *_R1.fastq.gz
 do
