@@ -1,5 +1,6 @@
 *.fasta
 *.fastq
+*.info
 *.log
 *.odt
 *.pyc
