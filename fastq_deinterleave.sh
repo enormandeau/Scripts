@@ -7,5 +7,5 @@
 
 gunzip -c $1 |
     paste - - - - - - - - |
-    tee >(cut -f 1-4 | tr "\t" "\n" | gzip > $2) |
-    cut -f 5-8 | tr "\t" "\n" | gzip > $3
+    tee >(cut -f 1-4 | tr "\t" "\n" | pigz -p 4 - > $2) |
+    cut -f 5-8 | tr "\t" "\n" | pigz -p 4 - > $3
