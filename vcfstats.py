@@ -53,11 +53,11 @@ with myopen(input_vcf, "rt") as infile:
             elif "##fileDate=" in line:
                 date = l[0].split("=")[1]
                 date = date[:4] + "-" + date[4: 6] + "-" + date[6:]
-                print(f"Date: {date}")
+                print(f"VCF date: {date}")
 
             elif "##source=" in line:
                 version = l[0].split("=")[1].replace('"', '')
-                print(f"Version: {version}")
+                print(f"Software version: {version}")
 
             elif l[0] == "#CHROM":
                 num_samples = len(l[9:])
