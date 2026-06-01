@@ -110,6 +110,6 @@ with open(output_fasta, "w") as outfile:
                     left = 0
 
                 region = Fasta(scaffold_id + "_" + position,
-                        seq[pos - flanking_size: pos + flanking_size].upper())
+                        seq[pos - flanking_size: pos + flanking_size + 1].upper())
 
                 region.write_to_file(outfile)
