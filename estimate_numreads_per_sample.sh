@@ -6,8 +6,10 @@
 
 # Global variables
 input_folder="$1"
-output_file=numreads_per_sample_"${input_folder%/}"
-rm $output_file 2>/dev/null
+output_stub=numreads_per_sample_"${input_folder%/}"
+output_fastq="$output_stub"_fastq.tsv
+output_bam="$output_stub"_bam.tsv
+
 module load samtools 2>/dev/null
 
 # Fastq files
@@ -23,10 +25,10 @@ do
     numreads=$(echo 10000 $size_subset $size_full | awk '{printf "%.0f\n", $1 * $3 / $2}')
     echo -e "$base\t$numreads"
     rm "$temp"
-done | tee "$output_file"_fastq
+done | tee "$output_fastq"
 
 # Cleanup if output file is empty
-[ -s "$output_file"_fastq ] ||  rm "$output_file"_fastq
+[ -s "$output_fastq" ] ||  rm "$output_fastq"
 
 # Bam files
 for bamfile in $(ls -1 "$input_folder"/*.bam 2>/dev/null)
@@ -34,7 +36,7 @@ do
     base=$(basename "$bamfile")
     numreads=$(samtools idxstats "$bamfile" | awk '{s+=$3}END{print s}')
     echo -e "$base\t$numreads"
-done | tee "$output_file"_bam
+done | tee "$output_bam"
 
 # Cleanup if output file is empty
-[ -s "$output_file"_bam ] || rm "$output_file"_bam
+[ -s "$output_bam" ] || rm "$output_bam"
