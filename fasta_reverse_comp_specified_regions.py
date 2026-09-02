@@ -75,7 +75,7 @@ def complement(s):
         print("The sequence contained non-alphabetic characters")
 
     s = s.replace("A","1").replace("T","2").replace("C","3").replace("G","4")
-    s = s.replace("a","5").replace("t","6").replace("c","7").replace("t","8")
+    s = s.replace("a","5").replace("t","6").replace("c","7").replace("g","8")
     s = s.replace("1","T").replace("2","A").replace("3","G").replace("4","C")
     s = s.replace("5","t").replace("6","a").replace("7","g").replace("8","c")
 
