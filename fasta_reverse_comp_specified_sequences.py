@@ -71,10 +71,38 @@ def complement(s):
     if not s.sequence.isalpha():
         print("The sequence contained non-alphabetic characters")
 
-    s.sequence = s.sequence.replace("A","1").replace("T","2").replace("C","3").replace("G","4")
-    s.sequence = s.sequence.replace("a","5").replace("t","6").replace("c","7").replace("g","8")
-    s.sequence = s.sequence.replace("1","T").replace("2","A").replace("3","G").replace("4","C")
-    s.sequence = s.sequence.replace("5","t").replace("6","a").replace("7","g").replace("8","c")
+    replace_dict = {}
+    correspondance = [
+            "AT",
+            "CG",
+            "NN",
+            "RY",
+            "SS",
+            "WW",
+            "KM",
+            "BV",
+            "DH",
+            "..",
+            "--",
+            ]
+
+    for c in correspondance:
+        replace_dict[c[0]] = c[1]
+        replace_dict[c[1]] = c[0]
+        replace_dict[c[0].lower()] = c[1].lower()
+        replace_dict[c[1].lower()] = c[0].lower()
+
+    print(replace_dict)
+    sys.exit()
+
+    new_s = []
+    for n in s.sequence:
+        try:
+            new_s.append(replace_dict[n])
+        except:
+            new_s.append(n)
+
+    s.sequence = "".join(new_s)
 
 # Parsing user input
 try:
@@ -98,13 +126,14 @@ fasta_sequences = fasta_iterator(fasta_file)
 with myopen(result_file, "wt") as outfile:
     for seq in fasta_sequences:
         name = seq.name
-        print(seq)
+        print(name, end="", flush=True)
 
         if name.split(" ")[0] in to_reverse:
-            print("reversed")
             reverse(seq)
             complement(seq)
             seq.write_to_file(outfile)
+            print(" sequence reversed")
 
         else:
+            print(" maintained")
             seq.write_to_file(outfile)
