@@ -71,7 +71,7 @@ def complement(s):
     """Return the complement of a sequence, *NOT* it's reverse complement
     """
 
-    if not s.sequence.isalpha():
+    if not s.isalpha():
         print("The sequence contained non-alphabetic characters")
 
     replace_dict = {}
